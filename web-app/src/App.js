@@ -4,6 +4,7 @@ import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import React, { useEffect, useState, useRef, useMemo } from "react";
 import { Order } from "./Order";
 import { AxiosShopApi } from "./api/AxiosProductsApi";
+import { TelegramMainButton } from "./components/TelegramMainButton";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -29,7 +30,7 @@ function App() {
 
   let totalSumOrder = useRef(0);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     tgApp.MainButton.setText(
       "Оформить заказ: " + totalSumOrder.current + " руб."
     );
@@ -40,12 +41,12 @@ function App() {
       tgApp.MainButton.hide();
 
     // eslint-disable-next-line
-  }, [products]);
+  }, [products]);*/
 
   // callback issue
   useEffect(() => {
     tgApp.MainButton.onClick(() => navigate("/order"));
-    return tgApp.MainButton.offClick(() => navigate("/order"));
+    //  return tgApp.MainButton.offClick(() => navigate("/order"));
     // eslint-disable-next-line
   }, []);
 

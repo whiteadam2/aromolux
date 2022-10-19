@@ -1,13 +1,15 @@
 import React from "react";
 import { Product } from "./Product";
 import { useNavigate } from "react-router-dom";
+import { TelegramMainButton } from "./components/TelegramMainButton";
 
 export function Products({ data, title, onChangeCount }) {
   const navigate = useNavigate();
   return (
     <div>
       <h1 className="my-10 text-2xl text-center font-semibold">{title}</h1>
-      <button onClick={() => navigate("/order")}>test</button>
+      {/* <button onClick={() => navigate("/order")}>test</button>*/}
+      <TelegramMainButton label="test" />
       <div className="flex flex-wrap justify-center gap-y-20 gap-x-8">
         {data.map((item) => (
           <Product
