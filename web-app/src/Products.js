@@ -46,15 +46,8 @@ export function Products({ categoryId, title }) {
     setCart({ products: updatedProducts, total: updatedTotal });
   }
 
-  useEffect(() => {
-    window.Telegram.WebApp.MainButton.onClick(() =>
-      navigate("/order", { state: cart })
-    );
-  }, [cart]);
-
   return (
     <div>
-      <button onClick={() => navigate("/order", { state: cart })}>Order</button>
       <h1 className="my-10 text-2xl text-center font-semibold">{title}</h1>
       {isFetching ? (
         <div className="flex justify-center items-center ">
@@ -66,12 +59,11 @@ export function Products({ categoryId, title }) {
         </div>
       ) : (
         <>
-          {cart.total ? (
+          {cart.total && (
             <TelegramMainButton
               label={"Оформить заказ: " + cart.total + " руб."}
+              onClick={() => navigate("/order", { state: cart })}
             />
-          ) : (
-            ""
           )}
           <div className="flex flex-wrap justify-center gap-y-20 gap-x-8">
             {data.map((product) => (
