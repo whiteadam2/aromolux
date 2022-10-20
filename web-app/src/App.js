@@ -57,9 +57,7 @@ function App() {
     totalSumOrder.current += product.price * options.inc;
   }
 
-  const womanProducts = products.filter(
-    (product) => product.categoryId === 209
-  );
+  const womanProducts = products.filter((product) => product.categoryId === 209);
 
   const manProducts = useMemo(
     () => products.filter((product) => product.categoryId === 212),
@@ -73,36 +71,9 @@ function App() {
     <div className="pt-10">
       <div className="container max-w-screen-md m-auto font-montserrat">
         <Routes>
-          <Route
-            path="/order"
-            element={
-              <Order
-                products={orderProducts}
-                totalSumOrder={totalSumOrder.current}
-              />
-            }
-          />
-          <Route
-            index
-            path="/woman"
-            element={
-              <Products
-                data={womanProducts}
-                onChangeCount={onChangeCount}
-                title="Женские духи"
-              />
-            }
-          />
-          <Route
-            path="/man"
-            element={
-              <Products
-                data={manProducts}
-                onChangeCount={onChangeCount}
-                title="Мужские духи"
-              />
-            }
-          />
+          <Route path="/order" element={<Order products={orderProducts} totalSumOrder={totalSumOrder.current} />} />
+          <Route index path="/woman" element={<Products categoryId={209} title="Женские духи" />} />
+          <Route path="/man" element={<Products categoryId={212} title="Мужские духи" />} />
           <Route path="*" element={<Navigate to="/woman" />} />
         </Routes>
       </div>

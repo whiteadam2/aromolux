@@ -1,18 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import { AxiosShopApi } from "../api/AxiosProductsApi";
+import { XMLParser } from "fast-xml-parser";
 
-const api = new AxiosShopApi("https://aromostore.ru");
+const parser = new XMLParser({
+  ignoreAttributes: false,
+  attributeNamePrefix: "",
+});
 
-export function useFetchProducts() {
-  const { data, isFetching, isError } = useQuery(
-    ["products"],
-    api.getProducts,
-    {
-      onSuccess: (data) => {
-        return data.map((product) => ({ ...product, count: 0 }));
-      },
-    }
-  );
+export function useFetchProducts(categoryId) {
+  const { data, isFetching, isError } = useQuery(["products"], () => fetch("https://aromostore.ru/yandex.xml"), {
+    onSuccess: (data) => {
+      const products = parser.parse(data.data).yml_catalog.shop.offers.offer;
+      return products
+        .sort((a, b) => b.position_global - a.position_global)
+        .filter((product) => product.categoryId === categoryId);
+    },
+  });
 
   return { data, isFetching, isError };
 }
