@@ -1,19 +1,20 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { TelegramMainButton } from "./components/TelegramMainButton";
 
-export function Order({ totalSumOrder, products }) {
-  const navigate = useNavigate();
+export function Order() {
+  const { state: cart } = useLocation();
+  const tgApp = window.Telegram.WebApp;
 
   useEffect(() => {
-    window.Telegram.WebApp.MainButton.setText("Подтвердить заказ!");
-    window.Telegram.WebApp.MainButton.onClick(() => navigate("/man"));
-    // eslint-disable-next-line
+    tgApp.MainButton.onClick(() => tgApp.close());
   }, []);
 
   return (
     <div className="mx-10 ">
+      <TelegramMainButton label={"Подтвердить заказ!"} />
       <h1 className="my-10 text-2xl text-center font-semibold">Ваш заказ:</h1>
-      {products.map((product) => (
+      {cart.products.map((product) => (
         <div
           key={product.id}
           className="flex justify-between items-center mb-4 gap-4"
@@ -32,9 +33,7 @@ export function Order({ totalSumOrder, products }) {
           </span>
         </div>
       ))}
-      <div className="text-right font-semibold">
-        Итого: {totalSumOrder} руб.
-      </div>
+      <div className="text-right font-semibold">Итого: {cart.total} руб.</div>
     </div>
   );
 }
