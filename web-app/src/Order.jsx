@@ -33,7 +33,12 @@ export function Order() {
           </span>
         </div>
       ))}
-      <div className="text-right font-semibold">Итого: !!! руб.</div>
+      <div className="text-right font-semibold">
+        {`Итого: ${orders.reduce(
+          (acc, order) => acc + order.count * order.price,
+          0
+        )} руб.`}
+      </div>
     </div>
   );
 }

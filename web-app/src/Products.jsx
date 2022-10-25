@@ -29,7 +29,10 @@ export function Products({ categoryId, title }) {
         <>
           {orders.length > 0 && (
             <MainButton
-              label={"Оформить заказ: ??? руб."}
+              label={`Оформить заказ: ${orders.reduce(
+                (acc, order) => acc + order.count * order.price,
+                0
+              )} руб.`}
               onClick={() => navigate("/order", { state: orders })}
             />
           )}
