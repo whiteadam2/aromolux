@@ -5,6 +5,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 export function Order() {
   const { state: orders } = useLocation();
 
+  const total = orders.reduce(
+    (acc, order) => acc + order.count * order.price,
+    0
+  );
+
   const navigate = useNavigate();
 
   return (
@@ -33,12 +38,7 @@ export function Order() {
           </span>
         </div>
       ))}
-      <div className="text-right font-semibold">
-        {`Итого: ${orders.reduce(
-          (acc, order) => acc + order.count * order.price,
-          0
-        )} руб.`}
-      </div>
+      <div className="text-right font-semibold">{`Итого: ${total} руб.`}</div>
     </div>
   );
 }

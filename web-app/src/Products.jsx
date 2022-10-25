@@ -1,14 +1,20 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Product } from "./Product";
+import { NavBar } from "./NavBar";
 import { MockProduct } from "./components/MockProduct";
 import { MainButton } from "./components/MainButton";
 import { useFetchProducts } from "./hooks/useFetchProducts";
-import { useNavigate } from "react-router-dom";
-import { NavBar } from "./NavBar";
 
 export function Products({ categoryId }) {
   const { data, isFetching } = useFetchProducts(categoryId);
   const [orders, setOrders] = useState([]);
+
+  const total = orders.reduce(
+    (acc, order) => acc + order.count * order.price,
+    0
+  );
 
   const navigate = useNavigate();
 
@@ -30,10 +36,7 @@ export function Products({ categoryId }) {
         <>
           {orders.length > 0 && (
             <MainButton
-              label={`Оформить заказ: ${orders.reduce(
-                (acc, order) => acc + order.count * order.price,
-                0
-              )} руб.`}
+              label={`Оформить заказ: ${total} руб.`}
               onClick={() => navigate("/order", { state: orders })}
             />
           )}

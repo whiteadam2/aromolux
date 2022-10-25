@@ -9,15 +9,24 @@ const parser = new XMLParser({
 
 export function useFetchProducts(categoryId) {
   const { data, isFetching, isError } = useQuery(
-    ["products", categoryId],
+    ["products"],
     () => axios.get("https://aromostore.ru/yandex.xml"),
     {
       select: (data) => {
         const products = parser.parse(data.data).yml_catalog.shop.offers.offer;
         return products
           .sort((a, b) => b.position_global - a.position_global)
-          .filter((product) => product.categoryId === categoryId);
+          .filter((product) => product.categoryId === categoryId)
+          .map((product) => ({
+            id: product.id,
+            name: product.name,
+            picture: product.picture,
+            price: product.price,
+            oldprice: product.oldprice,
+          }));
       },
+      cacheTime: Infinity,
+      staleTime: Infinity,
     }
   );
 

@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 export function NavBar() {
-  let activeClassName = "text-white bg-blue-500 p-2 underline";
+  const activeClassName = "text-white bg-blue-400 p-2 underline";
   return (
     <ul className="my-14 flex flex-row justify-around text-xl font-semibold">
       <li>
