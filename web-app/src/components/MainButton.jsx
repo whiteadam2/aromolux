@@ -7,7 +7,7 @@ const tgApp = window.Telegram.WebApp;
 export function MainButton(props) {
   return (
     <>
-      {tgApp.initData !== "" ? (
+      {tgApp.platform !== "unknown" ? (
         <TelegramMainButton {...props} />
       ) : (
         <WebMainButton {...props} />
