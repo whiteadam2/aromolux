@@ -14,15 +14,8 @@ function App() {
       <div className="container max-w-screen-md m-auto font-montserrat">
         <Routes>
           <Route path="/order" element={<Order />} />
-          <Route
-            index
-            path="/woman"
-            element={<Products categoryId={209} title="Женские духи" />}
-          />
-          <Route
-            path="/man"
-            element={<Products categoryId={212} title="Мужские духи" />}
-          />
+          <Route index path="/woman" element={<Products categoryId={209} />} />
+          <Route path="/man" element={<Products categoryId={212} />} />
           <Route path="*" element={<Navigate to="/woman" />} />
         </Routes>
       </div>

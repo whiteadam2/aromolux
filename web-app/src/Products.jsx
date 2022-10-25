@@ -4,8 +4,9 @@ import { MockProduct } from "./components/MockProduct";
 import { MainButton } from "./components/MainButton";
 import { useFetchProducts } from "./hooks/useFetchProducts";
 import { useNavigate } from "react-router-dom";
+import { NavBar } from "./NavBar";
 
-export function Products({ categoryId, title }) {
+export function Products({ categoryId }) {
   const { data, isFetching } = useFetchProducts(categoryId);
   const [orders, setOrders] = useState([]);
 
@@ -21,8 +22,8 @@ export function Products({ categoryId, title }) {
   }
 
   return (
-    <div className="relative">
-      <h1 className="my-10 text-2xl text-center font-semibold">{title}</h1>
+    <div>
+      <NavBar />
       {isFetching ? (
         <MockProduct />
       ) : (
