@@ -1,6 +1,6 @@
 import React from "react";
 
-export function ProductButton({ children, onClick, classes }) {
+export function Button({ children, onClick, classes }) {
   return (
     <div
       className={

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ProductButton } from "./components/ProductButton";
+import { Button } from "./components/Button";
 
 export function Product({ data, onOrder }) {
   const [count, setCount] = useState(0);
@@ -30,26 +30,26 @@ export function Product({ data, onOrder }) {
       </p>
       {count ? (
         <div className="flex justify-center gap-x-2">
-          <ProductButton
+          <Button
             classes="bg-red-400 hover:scale-105 hover:bg-red-500"
             onClick={() => handleChange(count - 1)}
           >
             &minus;
-          </ProductButton>
-          <ProductButton
+          </Button>
+          <Button
             classes="bg-emerald-400 hover:scale-105 hover:bg-emerald-500"
             onClick={() => handleChange(count + 1)}
           >
             +
-          </ProductButton>
+          </Button>
         </div>
       ) : (
-        <ProductButton
+        <Button
           classes="bg-emerald-400 hover:scale-105 hover:bg-blue-400"
           onClick={() => handleChange(count + 1)}
         >
           В корзину
-        </ProductButton>
+        </Button>
       )}
     </div>
   );

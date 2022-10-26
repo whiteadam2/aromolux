@@ -42,7 +42,17 @@ bot.on("message", async (msg) => {
         },
       });
     }
+
+    if (msg?.web_app_data?.data) {
+      const orders = JSON.parse(msg?.web_app_data?.data);
+      await bot.sendMessage(chatId, `Ваш заказ:`);
+      for (const order of orders) {
+        await bot.sendMessage(chatId, order.name + " " + order.count + " шт.");
+      }
+    }
   } catch (e) {
-    console.log();
+    console.log(e);
   }
 });
+
+bot.on;
