@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Cart({ orders }) {
+export function OrdersList({ orders }) {
   const total = orders.reduce(
     (acc, order) => acc + order.count * order.price,
     0
