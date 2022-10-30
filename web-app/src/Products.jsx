@@ -11,6 +11,7 @@ import { useFetchProducts } from "./hooks/useFetchProducts";
 export function Products({ categoryId }) {
   const { data, isFetching } = useFetchProducts(categoryId);
   const [orders, setOrders] = useState([]);
+  const navigate = useNavigate();
 
   const fakeProducts = [...new Array(8)];
 
@@ -18,8 +19,6 @@ export function Products({ categoryId }) {
     (acc, order) => acc + order.count * order.price,
     0
   );
-
-  const navigate = useNavigate();
 
   function handleOrder(nextOrder) {
     const filtered = orders.filter((order) => order.id !== nextOrder.id);
@@ -43,9 +42,20 @@ export function Products({ categoryId }) {
       <div className="flex flex-wrap justify-center gap-y-20 gap-x-8">
         {isFetching
           ? fakeProducts.map((_, index) => <MockProduct key={index} />)
-          : data.map((product) => (
-              <Product key={product.id} data={product} onOrder={handleOrder} />
-            ))}
+          : data.map((product) => {
+              const addedProduct = orders.find(
+                (order) => order.id === product.id
+              );
+              const count = addedProduct ? addedProduct.count : 0;
+              return (
+                <Product
+                  key={product.id}
+                  data={product}
+                  count={count}
+                  onOrder={handleOrder}
+                />
+              );
+            })}
       </div>
     </div>
   );

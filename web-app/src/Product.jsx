@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "./components/Button";
 
-export function Product({ data, onOrder }) {
-  const [count, setCount] = useState(0);
-
+export function Product({ data, count, onOrder }) {
   function handleChange(nextCount) {
-    setCount(nextCount);
     onOrder({ ...data, count: nextCount });
   }
 
