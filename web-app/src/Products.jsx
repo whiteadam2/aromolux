@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Product } from "./Product";
 import { NavBar } from "./NavBar";
+import { Sort } from "./Sort";
 import { MockProduct } from "./components/MockProduct";
 import { MainButton } from "./components/MainButton";
 import { useFetchProducts } from "./hooks/useFetchProducts";
@@ -10,6 +11,8 @@ import { useFetchProducts } from "./hooks/useFetchProducts";
 export function Products({ categoryId }) {
   const { data, isFetching } = useFetchProducts(categoryId);
   const [orders, setOrders] = useState([]);
+
+  const fakeProducts = [...new Array(8)];
 
   const total = orders.reduce(
     (acc, order) => acc + order.count * order.price,
@@ -30,23 +33,20 @@ export function Products({ categoryId }) {
   return (
     <div>
       <NavBar />
-      {isFetching ? (
-        <MockProduct />
-      ) : (
-        <>
-          {orders.length > 0 && (
-            <MainButton
-              label={`Оформить заказ: ${total} руб.`}
-              onClick={() => navigate("/order", { state: orders })}
-            />
-          )}
-          <div className="flex flex-wrap justify-center gap-y-20 gap-x-8">
-            {data.map((product) => (
+      <Sort />
+      {orders.length > 0 && (
+        <MainButton
+          label={`Оформить заказ: ${total} руб.`}
+          onClick={() => navigate("/order", { state: orders })}
+        />
+      )}
+      <div className="flex flex-wrap justify-center gap-y-20 gap-x-8">
+        {isFetching
+          ? fakeProducts.map((_, index) => <MockProduct key={index} />)
+          : data.map((product) => (
               <Product key={product.id} data={product} onOrder={handleOrder} />
             ))}
-          </div>
-        </>
-      )}
+      </div>
     </div>
   );
 }
