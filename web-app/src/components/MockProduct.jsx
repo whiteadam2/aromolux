@@ -7,8 +7,8 @@ export const MockProduct = (props) => (
     width={160}
     height={320}
     viewBox="0 0 160 320"
-    backgroundColor="#cee9fd"
-    foregroundColor="#f5faff"
+    backgroundColor="#f8eedd"
+    foregroundColor="#fff8e6"
     {...props}
   >
     <rect x="8" y="15" rx="0" ry="0" width="1" height="0" />

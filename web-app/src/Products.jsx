@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import { Product } from "./Product";
 import { NavBar } from "./NavBar";
-import { Sort } from "./Sort";
 import { MockProduct } from "./components/MockProduct";
 import { MainButton } from "./components/MainButton";
 import { useFetchProducts } from "./hooks/useFetchProducts";
@@ -32,7 +31,6 @@ export function Products({ categoryId }) {
   return (
     <div>
       <NavBar />
-      <Sort />
       {orders.length > 0 && (
         <MainButton
           label={`Оформить заказ: ${total} руб.`}
@@ -46,12 +44,11 @@ export function Products({ categoryId }) {
               const addedProduct = orders.find(
                 (order) => order.id === product.id
               );
-              const count = addedProduct ? addedProduct.count : 0;
               return (
                 <Product
                   key={product.id}
                   data={product}
-                  count={count}
+                  count={addedProduct ? addedProduct.count : 0}
                   onOrder={handleOrder}
                 />
               );

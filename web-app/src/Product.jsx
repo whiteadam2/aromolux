@@ -11,7 +11,7 @@ export function Product({ data, count, onOrder }) {
       <h2 className="h-16 text-center text-base font-normal leading-tight">
         {data.name}
       </h2>
-      <div className="w-40 h-40 relative border-solid border-2 border-blue-200 rounded-md">
+      <div className="w-40 h-40 relative border-solid border-2 border-yellow-dark rounded-md">
         <img src={data.picture} alt={data.name} className="rounded-md" />
         {count ? (
           <div className="absolute -top-3.5 -right-3.5 w-7 h-7 rounded-full bg-red-400 flex justify-center items-center text-white shadow-md">
