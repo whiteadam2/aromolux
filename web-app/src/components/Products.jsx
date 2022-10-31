@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { Product } from "./Product";
 import { NavBar } from "./NavBar";
-import { MockProduct } from "./MockProduct";
+import { ProductsSkeleton } from "./ProductsSkeleton";
 import { MainButton } from "./MainButton";
 import { useFetchProducts } from "../hooks/useFetchProducts";
 
@@ -15,8 +15,6 @@ export function Products() {
   const [search] = useSearchParams();
   const categoryId = parseInt(search.get("category"));
   const { data, isFetching } = useFetchProducts(categoryId);
-
-  const fakeProducts = [...new Array(8)];
 
   const total = orders.reduce(
     (acc, order) => acc + order.count * order.price,
@@ -42,21 +40,23 @@ export function Products() {
         />
       )}
       <div className="flex flex-wrap justify-center gap-y-20 gap-x-8">
-        {isFetching
-          ? fakeProducts.map((_, index) => <MockProduct key={index} />)
-          : data.map((product) => {
-              const addedProduct = orders.find(
-                (order) => order.id === product.id
-              );
-              return (
-                <Product
-                  key={product.id}
-                  data={product}
-                  count={addedProduct ? addedProduct.count : 0}
-                  onOrder={handleOrder}
-                />
-              );
-            })}
+        {isFetching ? (
+          <ProductsSkeleton amount={8} />
+        ) : (
+          data.map((product) => {
+            const addedProduct = orders.find(
+              (order) => order.id === product.id
+            );
+            return (
+              <Product
+                key={product.id}
+                data={product}
+                count={addedProduct ? addedProduct.count : 0}
+                onOrder={handleOrder}
+              />
+            );
+          })
+        )}
       </div>
     </div>
   );
