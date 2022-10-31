@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "./components/Button";
 
 export function Product({ data, count, onOrder }) {
   function handleChange(nextCount) {
@@ -27,26 +26,32 @@ export function Product({ data, count, onOrder }) {
       </p>
       {count ? (
         <div className="flex justify-center gap-x-2">
-          <Button
-            classes="bg-red-400 hover:scale-105 hover:bg-red-500"
+          <div
+            className="px-4 py-1.5 flex justify-center items-center shadow-md cursor-pointer
+            select-none text-white text-xl font-normal rounded-xl transition ease-in-out delay-450
+            duration-400  bg-red-400 hover:scale-105 hover:bg-red-500"
             onClick={() => handleChange(count - 1)}
           >
             &minus;
-          </Button>
-          <Button
-            classes="bg-emerald-400 hover:scale-105 hover:bg-emerald-500"
+          </div>
+          <div
+            className="px-4 py-1.5 flex justify-center items-center shadow-md cursor-pointer
+            select-none text-white text-xl font-normal rounded-xl transition ease-in-out delay-450
+            duration-400 bg-emerald-400 hover:scale-105 hover:bg-emerald-500"
             onClick={() => handleChange(count + 1)}
           >
             +
-          </Button>
+          </div>
         </div>
       ) : (
-        <Button
-          classes="bg-emerald-400 hover:scale-105 hover:bg-blue-400"
+        <div
+          className="px-4 py-1.5 flex justify-center items-center shadow-md cursor-pointer
+           select-none text-white text-xl font-normal rounded-xl transition ease-in-out delay-450
+           duration-400 bg-emerald-400 hover:scale-105 hover:bg-blue-400"
           onClick={() => handleChange(count + 1)}
         >
           В корзину
-        </Button>
+        </div>
       )}
     </div>
   );

@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { Product } from "./Product";
 import { NavBar } from "./NavBar";
-import { MockProduct } from "./components/MockProduct";
-import { MainButton } from "./components/MainButton";
-import { useFetchProducts } from "./hooks/useFetchProducts";
+import { MockProduct } from "./MockProduct";
+import { MainButton } from "./MainButton";
+import { useFetchProducts } from "../hooks/useFetchProducts";
 
-export function Products({ categoryId }) {
-  const { data, isFetching } = useFetchProducts(categoryId);
+export function Products() {
   const [orders, setOrders] = useState([]);
+
   const navigate = useNavigate();
+
+  const [search] = useSearchParams();
+  const categoryId = parseInt(search.get("category"));
+  const { data, isFetching } = useFetchProducts(categoryId);
 
   const fakeProducts = [...new Array(8)];
 

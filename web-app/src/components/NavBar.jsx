@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 
 export function NavBar() {
   const categories = [
-    { title: "Женские", url: "/woman" },
-    { title: "Мужские", url: "/man" },
+    { title: "Женские", url: "/products/?category=209" },
+    { title: "Мужские", url: "/products/?category=212" },
   ];
   const activeItemStyle = "p-2 text-white bg-blue-400 p-2 rounded-3xl";
   const itemStyle = "px-4 py-2 text-gray-400 bg-custom-bg p-2 rounded-3xl";

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { Products } from "./Products";
-import { Order } from "./Order";
+import { Products } from "./components/Products";
+import { Order } from "./components/Order";
 import "./App.css";
 
 function App() {
@@ -13,10 +13,9 @@ function App() {
     <div className="pt-10">
       <div className="container max-w-screen-md m-auto font-montserrat">
         <Routes>
+          <Route path="/" element={<Navigate to="/products/?category=209" />} />
           <Route path="/order" element={<Order />} />
-          <Route index path="/woman" element={<Products categoryId={209} />} />
-          <Route path="/man" element={<Products categoryId={212} />} />
-          <Route path="*" element={<Navigate to="/woman" />} />
+          <Route path="/products" element={<Products />} />
         </Routes>
       </div>
     </div>

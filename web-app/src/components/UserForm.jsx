@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Input } from "./components/Input";
-import { MainButton } from "./components/MainButton";
-import { sendOrders } from "./api/sendOrders";
+import { Input } from "./Input";
+import { MainButton } from "./MainButton";
+import { sendOrders } from "../api/sendOrders";
 
 export function UserForm({ orders }) {
   const [name, setName] = useState("");
