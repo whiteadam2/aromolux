@@ -10,7 +10,7 @@ export function Product({ data, count, onOrder }) {
       <h2 className="h-16 text-center text-base font-normal leading-tight">
         {data.name}
       </h2>
-      <div className="w-40 h-40 relative border-solid border-2 border-custom-bg rounded-md">
+      <div className="w-40 h-40 relative border-solid border-2 border-amber-400 rounded-md">
         <img src={data.picture} alt={data.name} className="rounded-md" />
         {count ? (
           <div className="absolute -top-3.5 -right-3.5 w-7 h-7 rounded-full bg-red-400 flex justify-center items-center text-white shadow-md">
@@ -37,7 +37,7 @@ export function Product({ data, count, onOrder }) {
           <div
             className="px-4 py-1.5 flex justify-center items-center shadow-md cursor-pointer
             select-none text-white text-xl font-normal rounded-xl transition ease-in-out delay-450
-            duration-400 bg-emerald-400 hover:scale-105 hover:bg-emerald-500"
+            duration-400 bg-blue-400 hover:scale-105 hover:bg-blue-500"
             onClick={() => handleChange(count + 1)}
           >
             +
@@ -47,7 +47,7 @@ export function Product({ data, count, onOrder }) {
         <div
           className="px-4 py-1.5 flex justify-center items-center shadow-md cursor-pointer
            select-none text-white text-xl font-normal rounded-xl transition ease-in-out delay-450
-           duration-400 bg-emerald-400 hover:scale-105 hover:bg-blue-400"
+           duration-400 bg-blue-400 hover:scale-105 hover:bg-blue-500"
           onClick={() => handleChange(count + 1)}
         >
           В корзину

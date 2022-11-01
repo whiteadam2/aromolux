@@ -13,8 +13,8 @@ export function ProductsSkeleton({ amount }) {
           width={160}
           height={320}
           viewBox="0 0 160 320"
-          backgroundColor="#e4f6f6"
-          foregroundColor="#f5ffff"
+          backgroundColor="#fbbf24"
+          foregroundColor="#ffd57a"
         >
           <rect x="8" y="15" rx="0" ry="0" width="1" height="0" />
           <rect x="0" y="4" rx="0" ry="0" width="160" height="32" />

@@ -9,13 +9,24 @@ import { useFetchProducts } from "../hooks/useFetchProducts";
 import { Sort } from "./Sort";
 
 export function Products() {
-  const [orders, setOrders] = useState([]);
-
   const navigate = useNavigate();
+
+  const [orders, setOrders] = useState([]);
+  const [sortItem, setSortItem] = useState(0);
 
   const [search] = useSearchParams();
   const categoryId = parseInt(search.get("category"));
   const { data, isFetching } = useFetchProducts(categoryId);
+
+  switch (sortItem) {
+    case 1:
+      data.sort((prev, next) => prev.price - next.price);
+      break;
+    case 2:
+      data.sort((prev, next) => prev.name.localeCompare(next.name));
+      break;
+    default:
+  }
 
   const total = orders.reduce(
     (acc, order) => acc + order.count * order.price,
@@ -34,7 +45,10 @@ export function Products() {
   return (
     <div>
       <NavBar />
-      <Sort />
+      <Sort
+        sortItem={sortItem}
+        onChangeSort={(itemId) => setSortItem(itemId)}
+      />
       {orders.length > 0 && (
         <MainButton
           label={`Оформить заказ: ${total} руб.`}
