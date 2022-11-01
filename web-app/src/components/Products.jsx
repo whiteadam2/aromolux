@@ -6,6 +6,7 @@ import { NavBar } from "./NavBar";
 import { ProductsSkeleton } from "./ProductsSkeleton";
 import { MainButton } from "./MainButton";
 import { useFetchProducts } from "../hooks/useFetchProducts";
+import { Sort } from "./Sort";
 
 export function Products() {
   const [orders, setOrders] = useState([]);
@@ -33,6 +34,7 @@ export function Products() {
   return (
     <div>
       <NavBar />
+      <Sort />
       {orders.length > 0 && (
         <MainButton
           label={`Оформить заказ: ${total} руб.`}
