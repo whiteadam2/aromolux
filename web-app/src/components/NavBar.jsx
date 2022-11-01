@@ -13,7 +13,7 @@ export function NavBar() {
   const itemStyle = "px-4 py-2 text-gray-100 bg-amber-400 p-2 rounded-3xl";
 
   return (
-    <ul className="my-12 flex flex-row gap-4 text-xl ">
+    <ul className="ml-6 my-12 flex flex-row gap-4 text-xl ">
       {categories.map((category) => (
         <li key={category.url}>
           <Link

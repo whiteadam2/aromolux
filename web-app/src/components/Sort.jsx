@@ -16,7 +16,7 @@ export function Sort({ sortItem, onChangeSort }) {
       {tgApp.platform !== "unknown" ? (
         ""
       ) : (
-        <div className="w-72 ml-auto mr-0 mb-8 relative">
+        <div className="w-72 mb-8 relative">
           <span className="font-medium">Сортировать по: </span>
           <span
             onClick={() => setIsVisible(!isVisible)}
