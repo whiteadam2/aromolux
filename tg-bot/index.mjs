@@ -11,18 +11,22 @@ bot.on("message", async (msg) => {
 
   try {
     if (text === "/start") {
-      await bot.sendMessage(chatId, "Received your message", {
-        reply_markup: {
-          keyboard: [
-            [
-              {
-                text: "Оформить заказ",
-                web_app: { url: "https://aromomania.ru/" },
-              },
+      await bot.sendMessage(
+        chatId,
+        "Для того чтобы получить духи со скидкой, перейдите в приложение:",
+        {
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: "Перейти",
+                  web_app: { url: "https://aromomania.ru/" },
+                },
+              ],
             ],
-          ],
-        },
-      });
+          },
+        }
+      );
     }
 
     if (msg?.web_app_data?.data) {

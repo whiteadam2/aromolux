@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { Product } from "./Product";
+import { Header } from "./Header";
 import { NavBar } from "./NavBar";
 import { ProductsSkeleton } from "./ProductsSkeleton";
 import { MainButton } from "./MainButton";
 import { useFetchProducts } from "../hooks/useFetchProducts";
-import { Sort } from "./Sort";
-import { Search } from "./Search";
 
 export function Products() {
   const navigate = useNavigate();
@@ -52,14 +51,9 @@ export function Products() {
 
   return (
     <div>
-      <NavBar />
-      <div className="flex justify-between">
-        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
-        <Sort
-          sortItem={sortItem}
-          onChangeSort={(itemId) => setSortItem(itemId)}
-        />
-      </div>
+      <Header searchValue={searchValue} setSearchValue={setSearchValue} />
+      <NavBar sortItem={sortItem} onSort={(id) => setSortItem(id)} />
+      <div className="flex justify-between mx-8"></div>
       {orders.length > 0 && (
         <MainButton
           label={`Оформить заказ: ${total} руб.`}

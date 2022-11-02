@@ -10,7 +10,7 @@ export function Search({ searchValue, setSearchValue }) {
       ) : (
         <div className="relative">
           <input
-            className="h-8 ml-6 pl-10 rounded-2xl w-60 outline-0"
+            className="h-8 pl-10 rounded-2xl w-48 outline-0"
             type="text"
             name="search"
             value={searchValue}
@@ -19,7 +19,7 @@ export function Search({ searchValue, setSearchValue }) {
           <img
             src="/images/search.svg"
             alt="Search"
-            className="w-5 h-5 absolute top-2 left-8"
+            className="w-5 h-5 absolute top-2 left-2"
           />
           <img
             src="/images/search_clear.svg"
