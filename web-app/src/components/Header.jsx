@@ -5,8 +5,8 @@ import { TelegramWrapper } from "./TelegramWrapper";
 export function Header({ searchValue, setSearchValue }) {
   return (
     <TelegramWrapper>
-      <div className="flex justify-between items-center mb-10">
-        <img src="/images/logo_parfum.png" alt="Logo" className="h-20" />
+      <div className="flex justify-between items-center mb-12">
+        <img src="/images/pg1.png" alt="Logo" className="h-12" />
         <Search searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
     </TelegramWrapper>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { Product } from "./Product";
@@ -7,6 +7,7 @@ import { NavBar } from "./NavBar";
 import { ProductsSkeleton } from "./ProductsSkeleton";
 import { MainButton } from "./MainButton";
 import { useFetchProducts } from "../hooks/useFetchProducts";
+import { Pagination } from "./Pagination";
 
 export function Products() {
   const navigate = useNavigate();
@@ -14,12 +15,19 @@ export function Products() {
   const [orders, setOrders] = useState([]);
   const [sortItem, setSortItem] = useState(0);
   const [searchValue, setSearchValue] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(4);
 
   const [params] = useSearchParams();
   const categoryId = parseInt(params.get("category"));
   let { data, isFetching } = useFetchProducts(categoryId);
+  let totalCountProducts = 0;
+
+  useEffect(() => setCurrentPage(1), data);
 
   if (!isFetching) {
+    totalCountProducts = data.length;
+
     switch (sortItem) {
       case 1:
         data.sort((prev, next) => prev.price - next.price);
@@ -32,6 +40,11 @@ export function Products() {
 
     data = data.filter((product) =>
       product.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
+    data = data.slice(
+      (currentPage - 1) * pageSize + 1,
+      (currentPage - 1) * pageSize + pageSize + 1
     );
   }
 
@@ -53,7 +66,6 @@ export function Products() {
     <div>
       <Header searchValue={searchValue} setSearchValue={setSearchValue} />
       <NavBar sortItem={sortItem} onSort={(id) => setSortItem(id)} />
-      <div className="flex justify-between mx-8"></div>
       {orders.length > 0 && (
         <MainButton
           label={`Оформить заказ: ${total} руб.`}
@@ -79,6 +91,12 @@ export function Products() {
           })
         )}
       </div>
+      <Pagination
+        pageSize={pageSize}
+        current={currentPage}
+        onChange={(page) => setCurrentPage(page)}
+        total={totalCountProducts}
+      />
     </div>
   );
 }
