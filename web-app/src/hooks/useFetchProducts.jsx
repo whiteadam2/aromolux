@@ -1,13 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { XMLParser } from "fast-xml-parser";
+import { useSearchParams } from "react-router-dom";
 import axios from "axios";
+import { XMLParser } from "fast-xml-parser";
 
 const parser = new XMLParser({
   ignoreAttributes: false,
   attributeNamePrefix: "",
 });
 
-export function useFetchProducts(categoryId) {
+export function useFetchProducts() {
+  const [params] = useSearchParams();
+  const categoryId = parseInt(params.get("category"));
+
   const { data, isFetching, isError } = useQuery(
     ["products"],
     () => axios.get("https://aromostore.ru/yandex.xml"),
