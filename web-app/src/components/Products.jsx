@@ -72,7 +72,7 @@ export function Products() {
           })
         )}
       </div>
-      {!isFetching && (
+      {!isFetching && pageCount > pageSize && (
         <Pagination
           pageSize={pageSize}
           current={currentPage}
