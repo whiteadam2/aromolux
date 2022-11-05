@@ -36,9 +36,9 @@ export function usePrepareProducts(data) {
       setPaginatedData(paginate(searchedData));
     }
     // eslint-disable-next-line
-  }, [data]);
+  }, [data, sortValue, searchValue, currentPage]);
 
-  return [
+  return {
     sortValue,
     setSortValue,
     searchValue,
@@ -49,5 +49,5 @@ export function usePrepareProducts(data) {
     setPageSize,
     pageCount,
     paginatedData,
-  ];
+  };
 }

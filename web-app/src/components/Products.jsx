@@ -15,10 +15,8 @@ export function Products() {
   const navigate = useNavigate();
 
   const [orders, setOrders] = useState([]);
-
   const { data, isFetching } = useFetchProducts();
-
-  const [
+  const {
     sortValue,
     setSortValue,
     searchValue,
@@ -28,9 +26,7 @@ export function Products() {
     pageSize,
     pageCount,
     paginatedData,
-  ] = usePrepareProducts(data);
-
-  console.log(paginatedData);
+  } = usePrepareProducts(data);
 
   const total = orders.reduce(
     (acc, order) => acc + order.count * order.price,
