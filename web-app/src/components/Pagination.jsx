@@ -4,9 +4,9 @@ import PaginationRC from "rc-pagination";
 
 export function Pagination(props) {
   return (
-    <div className="flex justify-center mt-12 mb-20">
+    <div className="flex justify-center mt-12 mb-20 ">
       <PaginationRC
-        className="flex gap-4"
+        className="flex flex-wrap gap-4"
         itemRender={(page, type, element) => {
           const style = classNames(
             "h-10 w-10 rounded-full cursor-pointer flex justify-center items-center select-none",
