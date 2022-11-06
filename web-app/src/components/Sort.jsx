@@ -12,7 +12,7 @@ export function Sort({ sortItem, onSort }) {
 
   return (
     <TelegramWrapper>
-      <div className="w-72 relative">
+      <div className="w-72 relative text-center">
         <span className="font-medium">Сортировать по: </span>
         <span
           onClick={() => setIsVisible(!isVisible)}
