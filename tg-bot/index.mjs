@@ -1,5 +1,11 @@
 import * as dotenv from "dotenv";
 import TelegramBot from "node-telegram-bot-api";
+import express from "express";
+import cors from "cors";
+
+const app = express();
+app.use(express.json());
+app.use(cors());
 
 dotenv.config();
 const token = process.env.TELEGRAM_TOKEN;
@@ -44,5 +50,30 @@ bot.on("message", async (msg) => {
     }
   } catch (e) {
     console.log(e);
+  }
+});
+
+app.listen(process.env.PORT, () =>
+  console.log(`Listening port ${process.env.PORT}...`)
+);
+
+app.post("/bot", async (req, res) => {
+  const { queryId, orders } = req.body;
+  const message = `Ваш заказ: ${orders
+    .map((product) => product.name)
+    .join(", ")} на сумму ${orders.reduce(
+    (acc, product) => acc + product.price
+  )} рублей! Ожидайте, с Вами свяжется менеджер!`;
+
+  try {
+    await bot.answerWebAppQuery(queryId, {
+      type: "article",
+      id: queryId,
+      title: "Успешная покупка",
+      input_message_content: { message_text: message },
+    });
+    return res.status(200).send();
+  } catch (e) {
+    res.status(500).send(e);
   }
 });

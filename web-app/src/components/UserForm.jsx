@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Input } from "./Input";
 import { MainButton } from "./MainButton";
-import { sendOrders } from "../api/sendOrders";
+import { sendToShop, sendToBot } from "../api/sendOrders";
 
 export function UserForm({ orders }) {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  function handleMainButtonClick() {
+  async function handleMainButtonClick() {
     if (!name || !phoneNumber) return;
 
     const cart = orders.map((order) => ({
@@ -16,10 +16,11 @@ export function UserForm({ orders }) {
     }));
 
     const tgApp = window.Telegram.WebApp;
+    const queryId = tgApp.initDataUnsafe?.query_id;
 
     if (tgApp.platform !== "unknown") {
-      sendOrders(cart, name, phoneNumber);
-      tgApp.sendData(JSON.stringify(orders));
+      await sendToShop(cart, name, phoneNumber);
+      await sendToBot(orders, queryId);
       tgApp.close();
     }
   }
