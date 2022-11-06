@@ -1,0 +1,15 @@
+[Unit]
+Description="Aromabot"
+
+[Service]
+ExecStart=/usr/bin/node --experimental-modules --es-module-specifier-resolution=node index.mjs
+WorkingDirectory=/home/ubuntu/aromabot/tg-bot
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=aromabot
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
