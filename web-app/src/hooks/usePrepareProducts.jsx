@@ -38,6 +38,10 @@ export function usePrepareProducts(data) {
     // eslint-disable-next-line
   }, [data, sortValue, searchValue, currentPage]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [data, sortValue, searchValue]);
+
   return {
     sortValue,
     setSortValue,

@@ -1,11 +1,11 @@
 import React from "react";
 import classNames from "classnames";
-import RC_pagination from "rc-pagination";
+import PaginationRC from "rc-pagination";
 
 export function Pagination(props) {
   return (
     <div className="flex justify-center mt-12 mb-20">
-      <RC_pagination
+      <PaginationRC
         className="flex gap-4"
         itemRender={(page, type, element) => {
           const style = classNames(
@@ -28,6 +28,7 @@ export function Pagination(props) {
             case "jump-prev":
             case "jump-next":
               return <span>...</span>;
+            default:
           }
           return element;
         }}
