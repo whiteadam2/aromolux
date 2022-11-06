@@ -53,7 +53,7 @@ export function Products() {
         />
       )}
 
-      <div className="flex flex-wrap justify-center gap-y-20 gap-x-8">
+      <div className="flex flex-wrap justify-center gap-y-20 gap-x-8 mb-20">
         {isFetching ? (
           <ProductsSkeleton amount={8} />
         ) : (
