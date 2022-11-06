@@ -57,12 +57,18 @@ app.listen(process.env.PORT, () =>
   console.log(`Listening port ${process.env.PORT}...`)
 );
 
+app.get("/", (req, res) => {
+  res.send("Hello!").status(200);
+});
+
 app.post("/bot", async (req, res) => {
   const { queryId, orders } = req.body;
+
   const message = `Ваш заказ: ${orders
     .map((product) => product.name)
     .join(", ")} на сумму ${orders.reduce(
-    (acc, product) => acc + product.price
+    (acc, order) => acc + order.price,
+    0
   )} рублей! Ожидайте, с Вами свяжется менеджер!`;
 
   try {
@@ -72,6 +78,7 @@ app.post("/bot", async (req, res) => {
       title: "Успешная покупка",
       input_message_content: { message_text: message },
     });
+
     return res.status(200).send();
   } catch (e) {
     res.status(500).send(e);
