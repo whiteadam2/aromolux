@@ -18,7 +18,7 @@ export function UserForm({ orders }) {
     const tgApp = window.Telegram.WebApp;
     const queryId = tgApp.initDataUnsafe?.query_id;
 
-    if (tgApp.platform !== "unknown") {
+    if (queryId) {
       await sendToShop(cart, name, phoneNumber);
       await sendToBot(orders, queryId);
       tgApp.close();
