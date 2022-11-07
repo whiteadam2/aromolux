@@ -71,7 +71,7 @@ app.post("/bot", async (req, res) => {
     0
   )} рублей!\n\nОжидайте, с Вами свяжется менеджер!`;
 
-  console.log(message);
+  console.log(queryId);
 
   try {
     await bot.answerWebAppQuery(queryId, {
