@@ -71,10 +71,6 @@ app.post("/bot", async (req, res) => {
     0
   )} рублей! Ожидайте, с Вами свяжется менеджер!`;
 
-  console.log("queryId: ", queryId);
-  console.log("queryId: ", JSON.stringify(orders));
-  return res.status(200).send();
-
   try {
     await bot.answerWebAppQuery(queryId, {
       type: "article",
