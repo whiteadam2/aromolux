@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="pt-10">
-      <div className="container max-w-screen-md m-auto font-montserrat">
+      <div className="container max-w-screen-md m-auto font-sans">
         <Routes>
           <Route path="/" element={<Navigate to="/products/?category=209" />} />
           <Route path="/order" element={<Order />} />

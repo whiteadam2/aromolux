@@ -15,12 +15,11 @@ export function UserForm({ orders }) {
       quantity: order.count,
     }));
 
-    await sendToShop(cart, name, phoneNumber);
-
     const tgApp = window.Telegram.WebApp;
     const queryId = tgApp.initDataUnsafe?.query_id;
 
     if (queryId) {
+      await sendToShop(cart, name, phoneNumber);
       await sendToBot(orders, queryId);
       tgApp.close();
     }
