@@ -64,14 +64,14 @@ app.get("/", (req, res) => {
 app.post("/bot", async (req, res) => {
   const { queryId, orders } = req.body;
 
-  console.log(queryId);
-
   const message = `Ваш заказ:\n\n${orders
     .map((product) => `${product.name} - ${product.count} шт.`)
     .join("\n")}\n\nИтого: ${orders.reduce(
     (acc, order) => acc + order.price,
     0
   )} рублей!\n\nОжидайте, с Вами свяжется менеджер!`;
+
+  console.log(message);
 
   try {
     await bot.answerWebAppQuery(queryId, {
