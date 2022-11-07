@@ -1,8 +1,11 @@
 import React from "react";
 
 export function Product({ data, count, onOrder }) {
+  const tgApp = window.Telegram.WebApp;
+
   function handleChange(nextCount) {
     onOrder({ ...data, count: nextCount });
+    tgApp.HapticFeedback.impactOccurred("medium");
   }
 
   return (
@@ -28,16 +31,14 @@ export function Product({ data, count, onOrder }) {
         <div className="flex justify-center gap-x-2">
           <div
             className="px-4 py-1.5 flex justify-center items-center shadow-md cursor-pointer
-            select-none text-white text-xl font-normal rounded-xl transition ease-in-out delay-450
-            duration-400  bg-red-400 hover:scale-105 hover:bg-red-500"
+            select-none text-white bg-red-500 text-xl font-normal rounded-xl"
             onClick={() => handleChange(count - 1)}
           >
             &minus;
           </div>
           <div
             className="px-4 py-1.5 flex justify-center items-center shadow-md cursor-pointer
-            select-none text-white text-xl font-normal rounded-xl transition ease-in-out delay-450
-            duration-400 bg-blue-400 hover:scale-105 hover:bg-blue-500"
+            select-none text-white bg-blue-500 text-xl font-normal rounded-xl"
             onClick={() => handleChange(count + 1)}
           >
             +
@@ -46,8 +47,7 @@ export function Product({ data, count, onOrder }) {
       ) : (
         <div
           className="px-4 py-1.5 flex justify-center items-center shadow-md cursor-pointer
-           select-none text-white text-xl font-normal rounded-xl transition ease-in-out delay-450
-           duration-400 bg-blue-400 hover:scale-105 hover:bg-blue-500"
+           select-none text-white bg-blue-500 text-xl font-normal rounded-xl"
           onClick={() => handleChange(count + 1)}
         >
           В корзину
