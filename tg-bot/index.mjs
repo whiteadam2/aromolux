@@ -64,6 +64,8 @@ app.get("/", (req, res) => {
 app.post("/bot", async (req, res) => {
   const { queryId, orders } = req.body;
 
+  console.log(queryId);
+
   const message = `Ваш заказ:\n\n${orders
     .map((product) => `${product.name} - ${product.count} шт.`)
     .join("\n")}\n\nИтого: ${orders.reduce(
