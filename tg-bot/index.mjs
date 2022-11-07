@@ -34,20 +34,6 @@ bot.on("message", async (msg) => {
         }
       );
     }
-
-    if (msg?.web_app_data?.data) {
-      const orders = JSON.parse(msg?.web_app_data?.data);
-      await bot.sendMessage(chatId, `Ваш заказ:`);
-
-      for (const order of orders) {
-        await bot.sendMessage(chatId, order.name + " " + order.count + " шт.");
-      }
-
-      await bot.sendMessage(
-        chatId,
-        `Спасибо за заказ! С Вами скоро свяжется менеджер!`
-      );
-    }
   } catch (e) {
     console.log(e);
   }
@@ -56,10 +42,6 @@ bot.on("message", async (msg) => {
 app.listen(process.env.PORT, () =>
   console.log(`Listening port ${process.env.PORT}...`)
 );
-
-app.get("/", (req, res) => {
-  res.send("Hello!").status(200);
-});
 
 app.post("/bot", async (req, res) => {
   const { queryId, orders } = req.body;
@@ -71,7 +53,7 @@ app.post("/bot", async (req, res) => {
     0
   )} рублей!\n\nОжидайте, с Вами свяжется менеджер!`;
 
-  console.log("Test");
+  console.log("Managing by Bot...");
 
   try {
     await bot.answerWebAppQuery(queryId, {
