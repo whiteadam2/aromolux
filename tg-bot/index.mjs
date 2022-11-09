@@ -53,7 +53,7 @@ app.post("/bot", async (req, res) => {
     0
   )} рублей!\n\nОжидайте, с Вами свяжется менеджер!`;
 
-  console.log("Managing by Bot...");
+  console.log("Managing by Bot... queryId:", queryId);
 
   try {
     await bot.answerWebAppQuery(queryId, {
