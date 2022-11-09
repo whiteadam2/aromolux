@@ -21,8 +21,9 @@ export function UserForm({ orders }) {
     if (queryId) {
       await sendToShop(cart, name, phoneNumber);
       await sendToBot(orders, queryId);
-      tgApp.close();
     }
+
+    tgApp.close();
   }
 
   return (
