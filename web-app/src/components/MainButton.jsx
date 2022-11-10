@@ -25,6 +25,7 @@ function TelegramMainButton({ label, onClick }) {
 
   useEffect(() => {
     window.Telegram.WebApp.MainButton.onClick(onClick);
+    return () => window.Telegram.WebApp.MainButton.offClick(onClick);
   }, [onClick]);
 
   return null;

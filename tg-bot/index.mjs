@@ -62,10 +62,9 @@ app.post("/bot", async (req, res) => {
       title: "Успешная покупка",
       input_message_content: { message_text: message },
     });
-
     return res.status(200).send();
   } catch (e) {
-    console.log(e);
-    res.status(500).send(e);
+    console.log(e.response.body.description);
+    return res.status(500).send(e.response.body.description);
   }
 });
