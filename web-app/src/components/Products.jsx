@@ -49,7 +49,7 @@ export function Products() {
       {orders.length > 0 && (
         <MainButton
           label={`Оформить заказ: ${total} руб.`}
-          onClick={() => navigate("/order", { state: orders })}
+          onClick={() => navigate("/cart", { state: orders })}
         />
       )}
 

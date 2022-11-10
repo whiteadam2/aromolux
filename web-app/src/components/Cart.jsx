@@ -6,7 +6,7 @@ import { UserForm } from "./UserForm";
 import { TelegramWrapper } from "./TelegramWrapper";
 import { BackButton } from "./BackButton";
 
-export function Order() {
+export function Cart() {
   const { state: orders } = useLocation();
 
   return (
