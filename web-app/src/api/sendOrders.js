@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function sendToShop(cart, name, phoneNumber) {
-  await axios.post(
+  return await axios.post(
     "https://aromostore.ru/telapi/?token_key=d1994656fbfdb6d627b",
     {
       cart,
@@ -14,7 +14,7 @@ export async function sendToShop(cart, name, phoneNumber) {
 }
 
 export async function sendToBot(orders, queryId) {
-  await axios({
+  return await axios({
     url: "https://aromomania.ru/bot",
     method: "post",
     data: JSON.stringify({ orders, queryId }),
