@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function BackButton() {
   const navigate = useNavigate();
