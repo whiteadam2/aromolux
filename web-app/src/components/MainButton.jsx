@@ -24,6 +24,7 @@ function TelegramMainButton({ label, onClick }) {
   }, [label]);
 
   useEffect(() => {
+    window.Telegram.WebApp.showPopup({ message: "Main Button UseEffect!" });
     window.Telegram.WebApp.MainButton.onClick(onClick);
   }, [onClick]);
 
