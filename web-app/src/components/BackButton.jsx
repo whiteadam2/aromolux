@@ -6,6 +6,7 @@ export function BackButton() {
   const tgApp = window.Telegram.WebApp;
 
   useEffect(() => {
+    tgApp.showPopup({ message: "Back Button" });
     tgApp.BackButton.show();
     tgApp.BackButton.onClick(() => navigate(-1));
     return () => tgApp.BackButton.hide();

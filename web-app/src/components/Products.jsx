@@ -10,6 +10,7 @@ import { NavBar } from "./NavBar";
 import { ProductsSkeleton } from "./ProductsSkeleton";
 import { MainButton } from "./MainButton";
 import { Pagination } from "./Pagination";
+import { TelegramWrapper } from "./TelegramWrapper";
 
 export function Products() {
   const navigate = useNavigate();
@@ -44,8 +45,12 @@ export function Products() {
 
   return (
     <>
-      <Header searchValue={searchValue} setSearchValue={setSearchValue} />
-      <NavBar sortItem={sortValue} onSort={(id) => setSortValue(id)} />
+      <TelegramWrapper>
+        <Header sortItem={sortValue} onSort={(id) => setSortValue(id)} />
+      </TelegramWrapper>
+
+      <NavBar searchValue={searchValue} setSearchValue={setSearchValue} />
+
       {orders.length > 0 && (
         <MainButton
           label={`Оформить заказ: ${total} руб.`}
@@ -72,6 +77,7 @@ export function Products() {
           })
         )}
       </div>
+
       {!isFetching && pageCount > pageSize && (
         <Pagination
           pageSize={pageSize}
