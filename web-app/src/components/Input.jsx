@@ -5,7 +5,7 @@ export function Input({ value, onChange, placeholder, isFocused }) {
     <>
       <input
         autoFocus={isFocused}
-        className="h-8 pl-2"
+        className="h-8 pl-2 outline-0 rounded-md"
         type="text"
         placeholder={placeholder}
         value={value}

@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export function OrdersList({ orders }) {
+  const navigate = useNavigate();
+
   const total = orders.reduce(
     (acc, order) => acc + order.count * order.price,
     0
@@ -8,7 +11,16 @@ export function OrdersList({ orders }) {
 
   return (
     <>
-      <h1 className="my-10 text-2xl text-center font-semibold">Ваш заказ:</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="my-10 text-xl text-center font-semibold">Ваш заказ:</h1>
+        <span
+          className="px-4 py-2 text-gray-100 bg-amber-400 rounded-3xl cursor-pointer opacity-80 hover:opacity-100"
+          onClick={() => navigate(-1)}
+        >
+          Изменить
+        </span>
+      </div>
+
       {orders.map((order) => (
         <div
           key={order.id}
@@ -17,7 +29,7 @@ export function OrdersList({ orders }) {
           <img
             src={order.picture}
             alt=""
-            className="w-16 h-16 border-solid border-2 border-blue-200 rounded-md"
+            className="w-16 h-16 border-solid border-2 border-amber-400 rounded-md"
           />
           <p className="text-center text-sm">{order.name}</p>
           <span className="whitespace-nowrap text-sm font-medium">
