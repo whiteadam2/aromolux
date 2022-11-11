@@ -14,7 +14,7 @@ export function OrdersList({ orders }) {
       <div className="flex justify-between items-center">
         <h1 className="my-10 text-xl text-center font-semibold">Ваш заказ:</h1>
         <span
-          className="px-4 py-2 text-gray-100 bg-amber-400 rounded-3xl cursor-pointer opacity-80 hover:opacity-100"
+          className="px-4 py-2 text-gray-100 bg-amber-400 rounded-3xl cursor-pointer shadow-sm"
           onClick={() => navigate(-1)}
         >
           Изменить
