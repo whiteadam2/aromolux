@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { OrdersContext } from "../App";
+import { AppContext } from "../context";
 
 import { OrdersList } from "./OrdersList";
 import { UserForm } from "./UserForm";
 
 export function Cart() {
-  const { orders } = useContext(OrdersContext);
+  const { orders } = useContext(AppContext);
 
   return (
     <div className="mx-10 ">

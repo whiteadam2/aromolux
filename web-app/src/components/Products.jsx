@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { OrdersContext } from "../App";
+import { AppContext } from "../context";
 import { useNavigate } from "react-router-dom";
 
 import { useFetchProducts } from "../hooks/useFetchProducts";
@@ -15,7 +15,7 @@ import { TelegramWrapper } from "./TelegramWrapper";
 
 export function Products() {
   const navigate = useNavigate();
-  const { orders, setOrders } = useContext(OrdersContext);
+  const { orders, setOrders } = useContext(AppContext);
 
   const { data, isFetching } = useFetchProducts();
   const {
