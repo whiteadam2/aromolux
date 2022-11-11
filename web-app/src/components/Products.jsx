@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { OrdersContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
 import { useFetchProducts } from "../hooks/useFetchProducts";
@@ -14,8 +15,8 @@ import { TelegramWrapper } from "./TelegramWrapper";
 
 export function Products() {
   const navigate = useNavigate();
+  const { orders, setOrders } = useContext(OrdersContext);
 
-  const [orders, setOrders] = useState([]);
   const { data, isFetching } = useFetchProducts();
   const {
     sortValue,
@@ -54,7 +55,7 @@ export function Products() {
       {orders.length > 0 && (
         <MainButton
           label={`Оформить заказ: ${total} руб.`}
-          onClick={() => navigate("/cart", { state: orders })}
+          onClick={() => navigate("/cart")}
         />
       )}
 
