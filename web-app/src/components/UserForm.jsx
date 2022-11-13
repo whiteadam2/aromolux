@@ -29,7 +29,7 @@ export function UserForm({ orders }) {
   return (
     <>
       <div className="flex flex-col gap-4 mt-6 mb-28">
-        <h2 className="text-center text-xl">Заполните свои данные:</h2>
+        <h2 className="text-center text-xl">Заполните свои данные</h2>
         <Input
           isFocused={true}
           placeholder="Имя"

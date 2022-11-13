@@ -6,7 +6,7 @@ function WebMainButton({ label, onClick }) {
   return (
     <div
       onClick={onClick}
-      className="w-40 p-2 fixed top-20 right-20 z-10 opacity-70 animate-bounce bg-red-500 text-white text-md  text-center rounded-xl cursor-pointer"
+      className="fixed w-1/2 py-2 bottom-8 left-1/4 z-10 opacity-80 animate-bounce bg-green-500 text-white text-md  text-center rounded-xl cursor-pointer"
     >
       {label}
     </div>
