@@ -1,6 +1,10 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setSearchValue } from "../redux/filterSlice";
 
-export function Search({ searchValue, setSearchValue }) {
+export function Search() {
+  const dispatch = useDispatch();
+  const searchValue = useSelector((state) => state.filter.searchValue);
   return (
     <div className="relative">
       <input
@@ -8,7 +12,7 @@ export function Search({ searchValue, setSearchValue }) {
         type="text"
         name="search"
         value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={(e) => dispatch(setSearchValue(e.target.value))}
       />
       <img
         src="/images/search.svg"
@@ -19,7 +23,7 @@ export function Search({ searchValue, setSearchValue }) {
         src="/images/search_clear.svg"
         alt="Clean up search!"
         className="w-4 h-4 absolute top-2 right-2 cursor-pointer opacity-30 hover:opacity-100"
-        onClick={() => setSearchValue("")}
+        onClick={() => dispatch(setSearchValue(""))}
       />
     </div>
   );

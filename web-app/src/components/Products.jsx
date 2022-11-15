@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setOrders } from "../redux/ordersSlice";
+import { setIsSortVisible } from "../redux/filterSlice";
 
 import {
   useFetchProducts,
@@ -23,23 +24,14 @@ export function Products() {
   const dispatch = useDispatch();
 
   const orders = useSelector((state) => state.orders);
-
-  const [isSortVisible, setIsSortVisible] = useState(false);
+  const { paginatedData, pageCount, pageSize } = useSelector(
+    (state) => state.filter
+  );
 
   const { data, isFetching } = useFetchProducts();
-  const {
-    sortValue,
-    setSortValue,
-    searchValue,
-    setSearchValue,
-    currentPage,
-    setCurrentPage,
-    pageSize,
-    pageCount,
-    paginatedData,
-  } = usePrepareProducts(data);
-
   const sortRef = useRef();
+
+  usePrepareProducts(data);
   useOutsideClick(sortRef, () => {
     setIsSortVisible(false);
   });
@@ -62,16 +54,10 @@ export function Products() {
   return (
     <>
       <TelegramWrapper>
-        <Header
-          sortItem={sortValue}
-          onSort={(id) => setSortValue(id)}
-          sortRef={sortRef}
-          isSortVisible={isSortVisible}
-          setIsSortVisible={setIsSortVisible}
-        />
+        <Header sortRef={sortRef} />
       </TelegramWrapper>
 
-      <NavBar searchValue={searchValue} setSearchValue={setSearchValue} />
+      <NavBar />
 
       {orders.length > 0 && (
         <MainButton
@@ -100,14 +86,7 @@ export function Products() {
         )}
       </div>
 
-      {!isFetching && pageCount > pageSize && (
-        <Pagination
-          pageSize={pageSize}
-          current={currentPage}
-          onChange={(page) => setCurrentPage(page)}
-          total={pageCount}
-        />
-      )}
+      {!isFetching && pageCount > pageSize && <Pagination />}
     </>
   );
 }

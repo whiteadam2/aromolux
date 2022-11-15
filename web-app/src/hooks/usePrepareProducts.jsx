@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setPaginatedData,
+  setCurrentPage,
+  setPageCount,
+} from "../redux/filterSlice";
 
 export function usePrepareProducts(data) {
-  const [paginatedData, setPaginatedData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(8);
-  const [pageCount, setPageCount] = useState(0);
-  const [sortValue, setSortValue] = useState(0);
-  const [searchValue, setSearchValue] = useState("");
+  const dispatch = useDispatch();
+  const { currentPage, pageSize, sortValue, searchValue } = useSelector(
+    (state) => state.filter
+  );
 
   function paginate(data) {
     const firstProduct = (currentPage - 1) * pageSize;
@@ -32,26 +37,13 @@ export function usePrepareProducts(data) {
     if (data) {
       const sortedData = sort(data);
       const searchedData = search(sortedData);
-      setPageCount(searchedData.length);
-      setPaginatedData(paginate(searchedData));
+      dispatch(setPageCount(searchedData.length));
+      dispatch(setPaginatedData(paginate(searchedData)));
     }
     // eslint-disable-next-line
   }, [data, sortValue, searchValue, currentPage]);
 
   useEffect(() => {
-    setCurrentPage(1);
+    dispatch(setCurrentPage(1));
   }, [data, sortValue, searchValue]);
-
-  return {
-    sortValue,
-    setSortValue,
-    searchValue,
-    setSearchValue,
-    currentPage,
-    setCurrentPage,
-    pageSize,
-    setPageSize,
-    pageCount,
-    paginatedData,
-  };
 }

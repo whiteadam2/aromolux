@@ -1,8 +1,15 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentPage } from "../redux/filterSlice";
+
 import classNames from "classnames";
 import PaginationRC from "rc-pagination";
 
-export function Pagination(props) {
+export function Pagination() {
+  const dispatch = useDispatch();
+  const { currentPage, pageSize, pageCount } = useSelector(
+    (state) => state.filter
+  );
   return (
     <div className="flex justify-center mt-12 mb-20 ">
       <PaginationRC
@@ -12,9 +19,9 @@ export function Pagination(props) {
             "h-10 w-10 rounded-full cursor-pointer flex justify-center items-center select-none",
             {
               "bg-amber-400 opacity-60 hover:opacity-100":
-                page !== props.current || type === "next",
+                page !== currentPage || type === "next",
               "bg-amber-800 text-white":
-                page === props.current && type !== "next",
+                page === currentPage && type !== "next",
             }
           );
 
@@ -32,7 +39,10 @@ export function Pagination(props) {
           }
           return element;
         }}
-        {...props}
+        pageSize={pageSize}
+        current={currentPage}
+        total={pageCount}
+        onChange={(page) => dispatch(setCurrentPage(page))}
       />
     </div>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Search } from "./Search";
 
-export function NavBar({ searchValue, setSearchValue }) {
+export function NavBar() {
   const location = useLocation();
   const path = location.pathname + location.search;
 
@@ -27,7 +27,7 @@ export function NavBar({ searchValue, setSearchValue }) {
           </li>
         ))}
       </ul>
-      <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+      <Search />
     </div>
   );
 }
