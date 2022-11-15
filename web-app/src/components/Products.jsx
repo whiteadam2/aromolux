@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { AppContext } from "../context";
 import { useNavigate } from "react-router-dom";
 
 import { useFetchProducts } from "../hooks/useFetchProducts";
 import { usePrepareProducts } from "../hooks/usePrepareProducts";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
 import { Product } from "./Product";
 import { Header } from "./Header";
@@ -16,6 +17,7 @@ import { TelegramWrapper } from "./TelegramWrapper";
 export function Products() {
   const navigate = useNavigate();
   const { orders, setOrders } = useContext(AppContext);
+  const [isSortVisible, setIsSortVisible] = useState(false);
 
   const { data, isFetching } = useFetchProducts();
   const {
@@ -29,6 +31,11 @@ export function Products() {
     pageCount,
     paginatedData,
   } = usePrepareProducts(data);
+
+  const sortRef = useRef();
+  useOutsideClick(sortRef, () => {
+    setIsSortVisible(false);
+  });
 
   const total = orders.reduce(
     (acc, order) => acc + order.count * order.price,
@@ -47,7 +54,13 @@ export function Products() {
   return (
     <>
       <TelegramWrapper>
-        <Header sortItem={sortValue} onSort={(id) => setSortValue(id)} />
+        <Header
+          sortItem={sortValue}
+          onSort={(id) => setSortValue(id)}
+          sortRef={sortRef}
+          isSortVisible={isSortVisible}
+          setIsSortVisible={setIsSortVisible}
+        />
       </TelegramWrapper>
 
       <NavBar searchValue={searchValue} setSearchValue={setSearchValue} />

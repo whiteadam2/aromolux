@@ -1,24 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 
-export function Sort({ sortItem, onSort }) {
-  const [isVisible, setIsVisible] = useState(false);
+export function Sort({
+  sortItem,
+  onSort,
+  sortRef,
+  isSortVisible,
+  setIsSortVisible,
+}) {
   const items = ["популярности", "цене", "алфавиту"];
 
   function handleSortClick(index) {
     onSort(index);
-    setIsVisible(false);
+    setIsSortVisible(false);
   }
 
   return (
-    <div className="w-72 relative text-center">
+    <div ref={sortRef} className="w-72 relative text-center">
       <span className="font-medium">Сортировать по: </span>
       <span
-        onClick={() => setIsVisible(!isVisible)}
+        onClick={() => setIsSortVisible(!isSortVisible)}
         className="text-red-500 underline underline-offset-4 decoration-dashed cursor-pointer"
       >
         {items[sortItem]}
       </span>
-      {isVisible && (
+      {isSortVisible && (
         <ul className="bg-white rounded-md w-36 flex flex-col shadow-md absolute top-7 right-4 z-10  overflow-hidden">
           {items.map((item, index) => (
             <li
