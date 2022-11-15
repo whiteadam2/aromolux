@@ -45,5 +45,6 @@ export function usePrepareProducts(data) {
 
   useEffect(() => {
     dispatch(setCurrentPage(1));
+    // eslint-disable-next-line
   }, [data, sortValue, searchValue]);
 }
