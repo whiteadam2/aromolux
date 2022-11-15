@@ -33,7 +33,7 @@ export function Products() {
 
   usePrepareProducts(data);
   useOutsideClick(sortRef, () => {
-    setIsSortVisible(false);
+    dispatch(setIsSortVisible(false));
   });
 
   const total = orders.reduce(
