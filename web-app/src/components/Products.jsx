@@ -1,10 +1,14 @@
-import React, { useContext, useRef, useState } from "react";
-import { AppContext } from "../context";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useFetchProducts } from "../hooks/useFetchProducts";
-import { usePrepareProducts } from "../hooks/usePrepareProducts";
-import { useOutsideClick } from "../hooks/useOutsideClick";
+import { useDispatch, useSelector } from "react-redux";
+import { setOrders } from "../redux/ordersSlice";
+
+import {
+  useFetchProducts,
+  usePrepareProducts,
+  useOutsideClick,
+} from "../hooks";
 
 import { Product } from "./Product";
 import { Header } from "./Header";
@@ -16,7 +20,10 @@ import { TelegramWrapper } from "./TelegramWrapper";
 
 export function Products() {
   const navigate = useNavigate();
-  const { orders, setOrders } = useContext(AppContext);
+  const dispatch = useDispatch();
+
+  const orders = useSelector((state) => state.orders);
+
   const [isSortVisible, setIsSortVisible] = useState(false);
 
   const { data, isFetching } = useFetchProducts();
@@ -48,7 +55,8 @@ export function Products() {
     if (nextOrder.count > 0) {
       filtered.push(nextOrder);
     }
-    setOrders(filtered);
+
+    dispatch(setOrders(filtered));
   }
 
   return (

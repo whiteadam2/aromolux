@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { AppProvider } from "./context";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { Products } from "./components/Products";
 import { Cart } from "./components/Cart";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 import "./App.css";
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
   }, []);
 
   return (
-    <AppProvider>
+    <Provider store={store}>
       <div className="pt-10">
         <div className="container max-w-screen-md m-auto font-sans">
           <Routes>
@@ -24,7 +25,7 @@ function App() {
           </Routes>
         </div>
       </div>
-    </AppProvider>
+    </Provider>
   );
 }
 
