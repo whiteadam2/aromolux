@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setOrders } from "../redux/ordersSlice";
 import { setIsSortVisible } from "../redux/filterSlice";
 
 import {
@@ -41,16 +40,6 @@ export function Products() {
     0
   );
 
-  function handleOrder(nextOrder) {
-    const filtered = orders.filter((order) => order.id !== nextOrder.id);
-
-    if (nextOrder.count > 0) {
-      filtered.push(nextOrder);
-    }
-
-    dispatch(setOrders(filtered));
-  }
-
   return (
     <>
       <TelegramWrapper>
@@ -79,7 +68,6 @@ export function Products() {
                 key={product.id}
                 data={product}
                 count={addedProduct ? addedProduct.count : 0}
-                onOrder={handleOrder}
               />
             );
           })

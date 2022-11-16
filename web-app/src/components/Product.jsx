@@ -1,10 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { handleOrder } from "../redux/ordersSlice";
 
 export function Product({ data, count, onOrder }) {
+  const dispatch = useDispatch();
   const tgApp = window.Telegram.WebApp;
 
   function handleChange(nextCount) {
-    onOrder({ ...data, count: nextCount });
+    dispatch(handleOrder({ ...data, count: nextCount }));
     tgApp.HapticFeedback.impactOccurred("medium");
   }
 
