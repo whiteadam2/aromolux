@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { handleOrder } from "../redux/ordersSlice";
 
-export function Product({ data, count, onOrder }) {
+export function Product({ data, count }) {
   const dispatch = useDispatch();
   const tgApp = window.Telegram.WebApp;
 
