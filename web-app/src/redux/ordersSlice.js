@@ -6,7 +6,7 @@ export const ordersSlice = createSlice({
   name: "orders",
   initialState,
   reducers: {
-    handleOrder: (state, action) => {
+    setOrders: (state, action) => {
       const filtered = state.filter((order) => order.id !== action.payload.id);
 
       if (action.payload.count > 0) {
@@ -18,6 +18,6 @@ export const ordersSlice = createSlice({
   },
 });
 
-export const { handleOrder } = ordersSlice.actions;
+export const { setOrders } = ordersSlice.actions;
 
 export default ordersSlice.reducer;
