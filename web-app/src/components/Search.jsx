@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { setSearchValue } from "../redux/filterSlice";
+import { useDebounce } from "../hooks";
 
 export function Search() {
-  const [immediateSearchValue, setImmediateSearchValue] = useState("");
-
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const handler = () => dispatch(setSearchValue(immediateSearchValue));
-    const timeout = setTimeout(handler, 1000);
-    return () => clearTimeout(timeout);
-    // eslint-disable-next-line
-  }, [immediateSearchValue]);
-
-  function clearSearchValue() {
-    setImmediateSearchValue("");
-  }
+  const [immediateSearchValue, setImmediateSearchValue] = useDebounce(
+    () => dispatch(setSearchValue(immediateSearchValue)),
+    500
+  );
 
   return (
     <div className="relative">
