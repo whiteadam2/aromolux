@@ -1,14 +1,16 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setOrders } from "../redux/ordersSlice";
 
-export function Product({ data, count }) {
+export function Product({ data }) {
   const dispatch = useDispatch();
-  const tgApp = window.Telegram.WebApp;
+  const orders = useSelector((state) => state.orders);
+  const product = orders.find((order) => order.id === data.id);
+  const count = product ? product.count : 0;
 
   function handleChange(nextCount) {
     dispatch(setOrders({ ...data, count: nextCount }));
-    tgApp.HapticFeedback.impactOccurred("medium");
+    window.Telegram.WebApp.HapticFeedback.impactOccurred("medium");
   }
 
   return (

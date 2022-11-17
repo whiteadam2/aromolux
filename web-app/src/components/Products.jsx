@@ -59,18 +59,9 @@ export function Products() {
         {isFetching ? (
           <ProductsSkeleton amount={8} />
         ) : (
-          paginatedData.map((product) => {
-            const addedProduct = orders.find(
-              (order) => order.id === product.id
-            );
-            return (
-              <Product
-                key={product.id}
-                data={product}
-                count={addedProduct ? addedProduct.count : 0}
-              />
-            );
-          })
+          paginatedData.map((product) => (
+            <Product key={product.id} data={product} />
+          ))
         )}
       </div>
 
