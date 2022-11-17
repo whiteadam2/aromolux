@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPage } from "../redux/filterSlice";
+import { setCurrentPage } from "../redux/productsSlice";
 
 import classNames from "classnames";
 import PaginationRC from "rc-pagination";
@@ -8,7 +8,7 @@ import PaginationRC from "rc-pagination";
 export function Pagination() {
   const dispatch = useDispatch();
   const { currentPage, pageSize, pageCount } = useSelector(
-    (state) => state.filter
+    (state) => state.products
   );
   return (
     <div className="flex justify-center mt-12 mb-20 ">

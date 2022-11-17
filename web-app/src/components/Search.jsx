@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setSearchValue } from "../redux/filterSlice";
+import { setSearchValue } from "../redux/productsSlice";
 import { useDebounce } from "../hooks";
 
 export function Search() {

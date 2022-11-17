@@ -9,8 +9,8 @@ const initialState = {
   searchValue: "",
 };
 
-export const filterSlice = createSlice({
-  name: "filter",
+export const productsSlice = createSlice({
+  name: "products",
   initialState,
   reducers: {
     setPaginatedData: (state, action) => {
@@ -41,6 +41,6 @@ export const {
   setPageCount,
   setSortValue,
   setSearchValue,
-} = filterSlice.actions;
+} = productsSlice.actions;
 
-export default filterSlice.reducer;
+export default productsSlice.reducer;

@@ -5,12 +5,12 @@ import {
   setPaginatedData,
   setCurrentPage,
   setPageCount,
-} from "../redux/filterSlice";
+} from "../redux/productsSlice";
 
 export function usePrepareProducts(data) {
   const dispatch = useDispatch();
   const { currentPage, pageSize, sortValue, searchValue } = useSelector(
-    (state) => state.filter
+    (state) => state.products
   );
 
   function paginate(data) {

@@ -17,7 +17,7 @@ export function Products() {
 
   const orders = useSelector((state) => state.orders);
   const { paginatedData, pageCount, pageSize } = useSelector(
-    (state) => state.filter
+    (state) => state.products
   );
 
   const { data, isFetching } = useFetchProducts();
