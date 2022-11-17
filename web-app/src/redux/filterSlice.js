@@ -7,7 +7,6 @@ const initialState = {
   pageCount: 0,
   sortValue: 0,
   searchValue: "",
-  isSortVisible: false,
 };
 
 export const filterSlice = createSlice({
@@ -32,9 +31,6 @@ export const filterSlice = createSlice({
     setSearchValue: (state, action) => {
       state.searchValue = action.payload;
     },
-    setIsSortVisible: (state, action) => {
-      state.isSortVisible = action.payload;
-    },
   },
 });
 
@@ -45,7 +41,6 @@ export const {
   setPageCount,
   setSortValue,
   setSearchValue,
-  setIsSortVisible,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

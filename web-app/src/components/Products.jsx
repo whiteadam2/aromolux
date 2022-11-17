@@ -1,14 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import { useDispatch, useSelector } from "react-redux";
-import { setIsSortVisible } from "../redux/filterSlice";
-
-import {
-  useFetchProducts,
-  usePrepareProducts,
-  useOutsideClick,
-} from "../hooks";
+import { useFetchProducts, usePrepareProducts } from "../hooks";
 
 import { Product } from "./Product";
 import { Header } from "./Header";
@@ -20,7 +14,6 @@ import { TelegramWrapper } from "./TelegramWrapper";
 
 export function Products() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const orders = useSelector((state) => state.orders);
   const { paginatedData, pageCount, pageSize } = useSelector(
@@ -28,12 +21,8 @@ export function Products() {
   );
 
   const { data, isFetching } = useFetchProducts();
-  const sortRef = useRef();
 
   usePrepareProducts(data);
-  useOutsideClick(sortRef, () => {
-    dispatch(setIsSortVisible(false));
-  });
 
   const total = orders.reduce(
     (acc, order) => acc + order.count * order.price,
@@ -43,7 +32,7 @@ export function Products() {
   return (
     <>
       <TelegramWrapper>
-        <Header sortRef={sortRef} />
+        <Header />
       </TelegramWrapper>
 
       <NavBar />
