@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export async function sendToShop(cart, name, phoneNumber) {
+export async function sendToShop(data, name, phoneNumber) {
   return await axios.post(
     "https://aromostore.ru/telapi/?token_key=d1994656fbfdb6d627b",
     {
-      cart,
+      data,
       user: {
         name,
         phoneNumber,

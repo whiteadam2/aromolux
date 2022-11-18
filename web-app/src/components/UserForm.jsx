@@ -10,7 +10,7 @@ export function UserForm({ orders }) {
   async function handleMainButtonClick() {
     if (!name || !phoneNumber) return;
 
-    const cart = orders.map((order) => ({
+    const data = orders.map((order) => ({
       productId: order.id,
       quantity: order.count,
     }));
@@ -19,7 +19,7 @@ export function UserForm({ orders }) {
     const queryId = tgApp.initDataUnsafe?.query_id;
 
     if (queryId) {
-      await sendToShop(cart, name, phoneNumber);
+      await sendToShop(data, name, phoneNumber);
       await sendToBot(orders, queryId);
     }
 

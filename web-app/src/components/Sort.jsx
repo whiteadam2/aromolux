@@ -1,13 +1,13 @@
 import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setSortValue } from "../redux/productsSlice";
+import { setSortValue } from "../redux/viewSlice";
 import { useOutsideClick } from "../hooks";
 
 export function Sort() {
   const dispatch = useDispatch();
 
   const [isVisible, setIsVisible] = useState(false);
-  const { sortValue } = useSelector((state) => state.products);
+  const { sortValue } = useSelector((state) => state.view);
 
   const items = ["популярности", "цене", "алфавиту"];
 

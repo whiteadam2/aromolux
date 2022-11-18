@@ -9,8 +9,8 @@ const initialState = {
   searchValue: "",
 };
 
-export const productsSlice = createSlice({
-  name: "products",
+export const viewSlice = createSlice({
+  name: "view",
   initialState,
   reducers: {
     setPaginatedData: (state, action) => {
@@ -41,6 +41,6 @@ export const {
   setPageCount,
   setSortValue,
   setSearchValue,
-} = productsSlice.actions;
+} = viewSlice.actions;
 
-export default productsSlice.reducer;
+export default viewSlice.reducer;

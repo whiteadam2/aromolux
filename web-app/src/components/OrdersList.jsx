@@ -1,13 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export function OrdersList({ orders }) {
+export function OrdersList({ cart }) {
   const navigate = useNavigate();
-
-  const total = orders.reduce(
-    (acc, order) => acc + order.count * order.price,
-    0
-  );
 
   return (
     <>
@@ -21,7 +16,7 @@ export function OrdersList({ orders }) {
         </span>
       </div>
 
-      {orders.map((order) => (
+      {cart.orders.map((order) => (
         <div
           key={order.id}
           className="flex justify-between items-center mb-4 gap-4"
@@ -40,7 +35,7 @@ export function OrdersList({ orders }) {
           </span>
         </div>
       ))}
-      <div className="text-right font-semibold">{`Итого ${total} руб.`}</div>
+      <div className="text-right font-semibold">{`Итого ${cart.total} руб.`}</div>
     </>
   );
 }
