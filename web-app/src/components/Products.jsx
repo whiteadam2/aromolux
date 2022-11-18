@@ -14,9 +14,7 @@ export function Products() {
   const navigate = useNavigate();
 
   const total = useSelector((state) => state.cart.total);
-  const { paginatedData, pageCount, pageSize } = useSelector(
-    (state) => state.view
-  );
+  const { paginatedData } = useSelector((state) => state.view);
 
   const { data, isFetching } = useFetchProducts();
   usePrepareProducts(data);
@@ -46,7 +44,7 @@ export function Products() {
         )}
       </div>
 
-      {!isFetching && pageCount > pageSize && <Pagination />}
+      {!isFetching && <Pagination />}
     </>
   );
 }

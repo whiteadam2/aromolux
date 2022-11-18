@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setPaginatedData,
   setCurrentPage,
-  setPageCount,
+  setTotalCount,
 } from "../redux/viewSlice";
 
 export function usePrepareProducts(data) {
@@ -37,7 +37,7 @@ export function usePrepareProducts(data) {
     if (data) {
       const sortedData = sort(data);
       const searchedData = search(sortedData);
-      dispatch(setPageCount(searchedData.length));
+      dispatch(setTotalCount(searchedData.length));
       dispatch(setPaginatedData(paginate(searchedData)));
     }
     // eslint-disable-next-line

@@ -4,7 +4,7 @@ const initialState = {
   paginatedData: [],
   currentPage: 1,
   pageSize: 8,
-  pageCount: 0,
+  totalCount: 0,
   sortValue: 0,
   searchValue: "",
 };
@@ -22,8 +22,8 @@ export const viewSlice = createSlice({
     setPageSize: (state, action) => {
       state.pageSize = action.payload;
     },
-    setPageCount: (state, action) => {
-      state.pageCount = action.payload;
+    setTotalCount: (state, action) => {
+      state.totalCount = action.payload;
     },
     setSortValue: (state, action) => {
       state.sortValue = action.payload;
@@ -38,7 +38,7 @@ export const {
   setPaginatedData,
   setCurrentPage,
   setPageSize,
-  setPageCount,
+  setTotalCount,
   setSortValue,
   setSearchValue,
 } = viewSlice.actions;
