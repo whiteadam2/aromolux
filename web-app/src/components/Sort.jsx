@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
-export function Sort({
-  sortItem,
-  onSort,
-  sortRef,
-  isSortVisible,
-  setIsSortVisible,
-}) {
+export function Sort({ sortItem, onSort }) {
+  const [isSortVisible, setIsSortVisible] = useState(false);
   const items = ["популярности", "цене", "алфавиту"];
+
+  const sortRef = useRef();
+  useOutsideClick(sortRef, () => {
+    setIsSortVisible(false);
+  });
 
   function handleSortClick(index) {
     onSort(index);
@@ -29,7 +30,7 @@ export function Sort({
             <li
               key={index}
               onClick={() => handleSortClick(index)}
-              className="p-2 hover:bg-amber-100 hover:text-amber-800 cursor-pointer"
+              className="p-2 hover:bg-gray-100 cursor-pointer"
             >
               {item}
             </li>
