@@ -1,7 +1,8 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useFetchProducts, usePrepareProducts } from "../hooks";
+import React, { useEffect } from "react";
+import { fetchProducts } from "../redux/productsSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { usePrepareProducts } from "../hooks";
 import { Product } from "./Product";
 import { Header } from "./Header";
 import { NavBar } from "./NavBar";
@@ -12,12 +13,20 @@ import { TelegramWrapper } from "./TelegramWrapper";
 
 export function Products() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [params] = useSearchParams();
 
+  const { entities: data, isLoading } = useSelector((state) => state.products);
+  const paginatedData = useSelector((state) => state.view.paginatedData);
   const total = useSelector((state) => state.cart.total);
-  const { paginatedData } = useSelector((state) => state.view);
 
-  const { data, isFetching } = useFetchProducts();
   usePrepareProducts(data);
+
+  useEffect(() => {
+    const categoryId = parseInt(params.get("category"));
+    dispatch(fetchProducts(categoryId));
+    // eslint-disable-next-line
+  }, [params]);
 
   return (
     <>
@@ -35,7 +44,7 @@ export function Products() {
       )}
 
       <div className="flex flex-wrap justify-center gap-y-20 gap-x-8 mb-20">
-        {isFetching ? (
+        {isLoading ? (
           <ProductsSkeleton amount={8} />
         ) : (
           paginatedData.map((product) => (
@@ -44,7 +53,7 @@ export function Products() {
         )}
       </div>
 
-      {!isFetching && <Pagination />}
+      {!isLoading && <Pagination />}
     </>
   );
 }
