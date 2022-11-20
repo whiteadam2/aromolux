@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { fetchProducts } from "../redux/productsSlice";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useGetProductsQuery } from "../redux/productsAPI";
+import { useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { usePrepareProducts } from "../hooks";
 import { Product } from "./Product";
@@ -13,20 +13,14 @@ import { TelegramWrapper } from "./TelegramWrapper";
 
 export function Products() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [params] = useSearchParams();
+  const categoryId = parseInt(params.get("category"));
 
-  const { entities: data, isLoading } = useSelector((state) => state.products);
+  const { data, isLoading } = useGetProductsQuery(categoryId);
   const paginatedData = useSelector((state) => state.view.paginatedData);
   const total = useSelector((state) => state.cart.total);
 
   usePrepareProducts(data);
-
-  useEffect(() => {
-    const categoryId = parseInt(params.get("category"));
-    dispatch(fetchProducts(categoryId));
-    // eslint-disable-next-line
-  }, [params]);
 
   return (
     <>
