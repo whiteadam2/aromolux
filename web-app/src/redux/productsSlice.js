@@ -8,7 +8,7 @@ const parser = new XMLParser({
 });
 
 let products = null;
-const initialState = { entities: null, isLoading: false };
+const initialState = { entities: null, isLoading: false, isError: false };
 
 export const fetchProducts = createAsyncThunk(
   "fetchProducts",
@@ -41,6 +41,10 @@ export const productsSlice = createSlice({
     },
     [fetchProducts.pending]: (state) => {
       state.isLoading = true;
+    },
+    [fetchProducts.rejected]: (state) => {
+      state.isLoading = false;
+      state.isError = true;
     },
   },
 });

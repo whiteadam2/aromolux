@@ -16,7 +16,11 @@ export function Products() {
   const dispatch = useDispatch();
   const [params] = useSearchParams();
 
-  const { entities: data, isLoading } = useSelector((state) => state.products);
+  const {
+    entities: data,
+    isLoading,
+    isError,
+  } = useSelector((state) => state.products);
   const paginatedData = useSelector((state) => state.view.paginatedData);
   const total = useSelector((state) => state.cart.total);
 
@@ -44,12 +48,19 @@ export function Products() {
       )}
 
       <div className="flex flex-wrap justify-center gap-y-20 gap-x-8 mb-20">
-        {isLoading ? (
+        {isLoading && !isError ? (
           <ProductsSkeleton amount={8} />
         ) : (
           paginatedData.map((product) => (
             <Product key={product.id} data={product} />
           ))
+        )}
+        {isError && (
+          <div>
+            <p className="text-xl w-80 text-center mt-20">
+              К сожалению произошла ошибка при загрузке данных!
+            </p>
+          </div>
         )}
       </div>
 
