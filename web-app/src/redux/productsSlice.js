@@ -7,13 +7,16 @@ const parser = new XMLParser({
   attributeNamePrefix: "",
 });
 
+let products = null;
 const initialState = { entities: null, isLoading: false };
 
 export const fetchProducts = createAsyncThunk(
   "fetchProducts",
   async (categoryId) => {
-    const data = await axios.get("https://aromostore.ru/yandex.xml");
-    const products = parser.parse(data.data).yml_catalog.shop.offers.offer;
+    if (!products) {
+      const data = await axios.get("https://aromostore.ru/yandex.xml");
+      products = parser.parse(data.data).yml_catalog.shop.offers.offer;
+    }
     return products
       .sort((a, b) => b.position_global - a.position_global)
       .filter((product) => product.categoryId === categoryId)
@@ -41,7 +44,5 @@ export const productsSlice = createSlice({
     },
   },
 });
-
-//export const {} = productsSlice.actions;
 
 export default productsSlice.reducer;
