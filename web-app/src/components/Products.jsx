@@ -4,12 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { usePrepareProducts } from "../hooks";
 import { Product } from "./Product";
-import { Header } from "./Header";
-import { NavBar } from "./NavBar";
 import { ProductsSkeleton } from "./ProductsSkeleton";
 import { MainButton } from "./MainButton";
 import { Pagination } from "./Pagination";
-import { TelegramWrapper } from "./TelegramWrapper";
 
 export function Products() {
   const navigate = useNavigate();
@@ -34,12 +31,6 @@ export function Products() {
 
   return (
     <>
-      <TelegramWrapper>
-        <Header />
-      </TelegramWrapper>
-
-      <NavBar />
-
       {total > 0 && (
         <MainButton
           label={`Оформить заказ: ${total} руб.`}

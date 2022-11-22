@@ -7,7 +7,7 @@ export function Sort() {
   const dispatch = useDispatch();
 
   const [isVisible, setIsVisible] = useState(false);
-  const { sortValue } = useSelector((state) => state.view);
+  const sortValue = useSelector((state) => state.view.sortValue);
 
   const items = ["популярности", "цене", "алфавиту"];
 
