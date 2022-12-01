@@ -7,7 +7,7 @@ export async function sendToShop(
   phoneNumber: string
 ) {
   return await axios.post(
-    "https://aromostore.ru/telapi/?token_key=d1994656fbfdb6d627b",
+    "https://aromomama.ru/telapi/?token_key=d1994656fbfdb6d627b",
     {
       data,
       user: {
