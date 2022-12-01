@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export function useDebounce(func, ms) {
+export function useDebounce(
+  func: () => void,
+  ms: number
+): [string, React.Dispatch<React.SetStateAction<string>>] {
   const [immediateValue, setImmediateValue] = useState("");
 
   useEffect(() => {

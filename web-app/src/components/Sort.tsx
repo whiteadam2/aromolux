@@ -1,20 +1,19 @@
 import React, { useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../hooks/redux";
 import { setSortValue } from "../redux/viewSlice";
 import { useOutsideClick } from "../hooks";
 
 export function Sort() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [isVisible, setIsVisible] = useState(false);
-  const sortValue = useSelector((state) => state.view.sortValue);
-
+  const sortValue = useAppSelector((state: any) => state.view.sortValue);
   const items = ["популярности", "цене", "алфавиту"];
 
-  const sortRef = useRef();
+  const sortRef = useRef<HTMLDivElement>(null);
   useOutsideClick(sortRef, () => setIsVisible(false));
 
-  function handleSortClick(index) {
+  function handleSortClick(index: number) {
     dispatch(setSortValue(index));
     setIsVisible(false);
   }

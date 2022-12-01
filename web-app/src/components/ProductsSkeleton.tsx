@@ -1,7 +1,11 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-export function ProductsSkeleton({ amount }) {
+interface ProductsSkeletonProps {
+  amount: number;
+}
+
+export function ProductsSkeleton({ amount }: ProductsSkeletonProps) {
   const fakeProducts = [...new Array(amount)];
 
   return (

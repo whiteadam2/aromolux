@@ -1,10 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../hooks/redux";
 import { setSearchValue } from "../redux/viewSlice";
 import { useDebounce } from "../hooks";
 
 export function Search() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [immediateSearchValue, setImmediateSearchValue] = useDebounce(
     () => dispatch(setSearchValue(immediateSearchValue)),

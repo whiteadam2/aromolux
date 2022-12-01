@@ -1,13 +1,12 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../hooks/redux";
 import { setCurrentPage } from "../redux/viewSlice";
-
 import classNames from "classnames";
 import PaginationRC from "rc-pagination";
 
 export function Pagination() {
-  const dispatch = useDispatch();
-  const { currentPage, pageSize, totalCount } = useSelector(
+  const dispatch = useAppDispatch();
+  const { currentPage, pageSize, totalCount } = useAppSelector(
     (state) => state.view
   );
   return (

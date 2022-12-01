@@ -1,18 +1,24 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { IProduct, IOrder } from "../@types";
+import { useAppSelector, useAppDispatch } from "../hooks/redux";
 import { addProduct, removeProduct } from "../redux/cartSlice";
 
-export function Product({ data }) {
-  const dispatch = useDispatch();
-  const orders = useSelector((state) => state.cart.orders);
-  const product = orders.find((order) => order.id === data.id);
+interface ProductProps {
+  data: IProduct;
+}
 
-  const handleClickAdd = (data) => {
+export function Product({ data }: ProductProps) {
+  const dispatch = useAppDispatch();
+
+  const orders = useAppSelector((state) => state.cart.orders);
+  const productInCart = orders.find((order: IOrder) => order.id === data.id);
+
+  const handleClickAdd = (data: IProduct) => {
     dispatch(addProduct(data));
     window.Telegram.WebApp.HapticFeedback.impactOccurred("medium");
   };
 
-  const handleClickRemove = (id) => {
+  const handleClickRemove = (id: string) => {
     dispatch(removeProduct(id));
     window.Telegram.WebApp.HapticFeedback.impactOccurred("medium");
   };
@@ -24,9 +30,9 @@ export function Product({ data }) {
       </h2>
       <div className="w-40 h-40 relative border-solid border-2 border-amber-400 rounded-md">
         <img src={data.picture} alt={data.name} className="rounded-md" />
-        {product && (
+        {productInCart && (
           <div className="absolute -top-3.5 -right-3.5 w-7 h-7 rounded-full bg-red-400 flex justify-center items-center text-white shadow-md">
-            {product.count}
+            {productInCart.count}
           </div>
         )}
       </div>
@@ -34,7 +40,7 @@ export function Product({ data }) {
         <span className="line-through">{data.oldprice} руб.</span>
         <span className="text-red-400 font-semibold">{data.price} руб.</span>
       </p>
-      {product ? (
+      {productInCart ? (
         <div className="flex justify-center gap-x-2">
           <div
             className="px-4 py-1.5 flex justify-center items-center shadow-md cursor-pointer

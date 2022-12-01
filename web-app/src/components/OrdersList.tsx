@@ -1,7 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { ICart } from "../@types";
 
-export function OrdersList({ cart }) {
+interface OrdersListProps {
+  cart: ICart;
+}
+
+export function OrdersList({ cart }: OrdersListProps) {
   const navigate = useNavigate();
 
   return (

@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 
-export function Input({ value, onChange, placeholder, isFocused }) {
+interface InputProps {
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  placeholder: string;
+  isFocused?: boolean;
+}
+
+export function Input({ value, onChange, placeholder, isFocused }: InputProps) {
   const [changed, setChanged] = useState(false);
   return (
     <>

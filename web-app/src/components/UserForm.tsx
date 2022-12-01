@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { Input } from "./Input";
 import { MainButton } from "./MainButton";
 import { sendToShop, sendToBot } from "../api/sendOrders";
+import { IOrder } from "../@types";
 
-export function UserForm({ orders }) {
+interface UserFormProps {
+  orders: IOrder[];
+}
+
+export function UserForm({ orders }: UserFormProps) {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 

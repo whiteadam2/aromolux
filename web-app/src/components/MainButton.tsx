@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 
 const tgApp = window.Telegram.WebApp;
 
-function WebMainButton({ label, onClick }) {
+interface ButtonProps {
+  label: string;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+}
+
+function WebMainButton({ label, onClick }: ButtonProps) {
   return (
     <div
       onClick={onClick}
@@ -13,7 +18,7 @@ function WebMainButton({ label, onClick }) {
   );
 }
 
-function TelegramMainButton({ label, onClick }) {
+function TelegramMainButton({ label, onClick }: ButtonProps) {
   useEffect(() => {
     tgApp.MainButton.show();
     return () => tgApp.MainButton.hide();
@@ -31,7 +36,7 @@ function TelegramMainButton({ label, onClick }) {
   return null;
 }
 
-export function MainButton(props) {
+export function MainButton(props: ButtonProps) {
   return (
     <>
       {tgApp.platform !== "unknown" ? (

@@ -1,31 +1,32 @@
 import React, { useEffect } from "react";
 import { fetchProducts } from "../redux/productsSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../hooks/redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { usePrepareProducts } from "../hooks";
 import { Product } from "./Product";
 import { ProductsSkeleton } from "./ProductsSkeleton";
 import { MainButton } from "./MainButton";
 import { Pagination } from "./Pagination";
+import { IProduct } from "../@types";
 
 export function Products() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [params] = useSearchParams();
 
   const {
     entities: data,
     isLoading,
     isError,
-  } = useSelector((state) => state.products);
-  const paginatedData = useSelector((state) => state.view.paginatedData);
-  const total = useSelector((state) => state.cart.total);
+  } = useAppSelector((state) => state.products);
+  const paginatedData = useAppSelector((state) => state.view.paginatedData);
+  const total = useAppSelector((state) => state.cart.total);
 
   usePrepareProducts(data);
 
   useEffect(() => {
-    const categoryId = parseInt(params.get("category"));
-    dispatch(fetchProducts(categoryId));
+    const categoryId = params.get("category");
+    if (categoryId) dispatch(fetchProducts(parseInt(categoryId)));
     // eslint-disable-next-line
   }, [params]);
 
@@ -42,7 +43,7 @@ export function Products() {
         {isLoading && !isError ? (
           <ProductsSkeleton amount={8} />
         ) : (
-          paginatedData.map((product) => (
+          paginatedData.map((product: IProduct) => (
             <Product key={product.id} data={product} />
           ))
         )}

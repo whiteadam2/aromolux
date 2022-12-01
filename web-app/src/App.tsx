@@ -4,21 +4,24 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { Products } from "./components/Products";
 import { Cart } from "./components/Cart";
 import { Provider } from "react-redux";
-import { Layout } from "./components/Layout";
+import { ContentLayout } from "./components/ContentLayout";
+import { GlobalLayout } from "./components/GlobalLayout";
 import "./App.css";
 
-function App() {
+const App: React.FC = () => {
   return (
     <Provider store={store}>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to="/products/?category=209" />} />
+        <Route path="/" element={<GlobalLayout />}>
+          <Route path="/" element={<ContentLayout />}>
+            <Route index element={<Navigate to="/products/?category=209" />} />
+            <Route path="/products" element={<Products />} />
+          </Route>
           <Route path="/cart" element={<Cart />} />
-          <Route path="/products" element={<Products />} />
         </Route>
       </Routes>
     </Provider>
   );
-}
+};
 
 export default App;

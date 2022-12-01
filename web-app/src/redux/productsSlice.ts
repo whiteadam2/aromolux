@@ -1,22 +1,36 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { XMLParser } from "fast-xml-parser";
+import { IProductXML, IProduct } from "../@types";
 
 const parser = new XMLParser({
   ignoreAttributes: false,
   attributeNamePrefix: "",
 });
 
-let products = null;
-const initialState = { entities: null, isLoading: false, isError: false };
+let products: IProductXML[];
+
+interface IState {
+  entities: IProduct[] | null;
+  isLoading: boolean;
+  isError: boolean;
+}
+const initialState: IState = {
+  entities: null,
+  isLoading: false,
+  isError: false,
+};
 
 export const fetchProducts = createAsyncThunk(
   "fetchProducts",
-  async (categoryId) => {
+  async (categoryId: number): Promise<IProduct[]> => {
     if (!products) {
-      const data = await axios.get("https://aromostore.ru/yandex.xml");
-      products = parser.parse(data.data).yml_catalog.shop.offers.offer;
+      const { data } = await axios.get<string>(
+        "https://aromomama.ru/yandex.xml"
+      );
+      products = parser.parse(data).yml_catalog.shop.offers.offer;
     }
+
     return products
       .sort((a, b) => b.position_global - a.position_global)
       .filter((product) => product.categoryId === categoryId)
@@ -34,18 +48,20 @@ export const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {},
-  extraReducers: {
-    [fetchProducts.fulfilled]: (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.entities = action.payload;
       state.isLoading = false;
-    },
-    [fetchProducts.pending]: (state) => {
+    });
+
+    builder.addCase(fetchProducts.pending, (state) => {
       state.isLoading = true;
-    },
-    [fetchProducts.rejected]: (state) => {
+    });
+
+    builder.addCase(fetchProducts.rejected, (state) => {
       state.isLoading = false;
       state.isError = true;
-    },
+    });
   },
 });
 
