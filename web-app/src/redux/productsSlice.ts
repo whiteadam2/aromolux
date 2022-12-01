@@ -10,12 +10,12 @@ const parser = new XMLParser({
 
 let products: IProductXML[];
 
-interface IState {
+interface IProductsState {
   entities: IProduct[] | null;
   isLoading: boolean;
   isError: boolean;
 }
-const initialState: IState = {
+const initialState: IProductsState = {
   entities: null,
   isLoading: false,
   isError: false,

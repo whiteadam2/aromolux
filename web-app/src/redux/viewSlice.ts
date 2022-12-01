@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IProduct } from "../@types";
 
-interface IState {
+interface IViewState {
   paginatedData: IProduct[];
   currentPage: number;
   pageSize: number;
@@ -10,7 +10,7 @@ interface IState {
   searchValue: string;
 }
 
-const initialState: IState = {
+const initialState: IViewState = {
   paginatedData: [],
   currentPage: 1,
   pageSize: 8,
