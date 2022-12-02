@@ -32,3 +32,18 @@ export interface IShopOrder {
   productId: string;
   quantity: number;
 }
+
+export interface IProductsState {
+  entities: IProduct[] | null;
+  isLoading: boolean;
+  isError: boolean;
+}
+
+export interface IViewState {
+  paginatedData: IProduct[];
+  currentPage: number;
+  pageSize: number;
+  totalCount: number;
+  sortValue: number;
+  searchValue: string;
+}

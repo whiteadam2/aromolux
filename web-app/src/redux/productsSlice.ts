@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { XMLParser } from "fast-xml-parser";
-import { IProductXML, IProduct } from "../@types";
+import { IProductXML, IProduct, IProductsState } from "../@types";
 
 const parser = new XMLParser({
   ignoreAttributes: false,
@@ -10,11 +10,6 @@ const parser = new XMLParser({
 
 let products: IProductXML[];
 
-interface IProductsState {
-  entities: IProduct[] | null;
-  isLoading: boolean;
-  isError: boolean;
-}
 const initialState: IProductsState = {
   entities: null,
   isLoading: false,

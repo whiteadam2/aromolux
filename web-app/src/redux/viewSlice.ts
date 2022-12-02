@@ -1,14 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IProduct } from "../@types";
-
-interface IViewState {
-  paginatedData: IProduct[];
-  currentPage: number;
-  pageSize: number;
-  totalCount: number;
-  sortValue: number;
-  searchValue: string;
-}
+import { IProduct, IViewState } from "../@types";
 
 const initialState: IViewState = {
   paginatedData: [],
