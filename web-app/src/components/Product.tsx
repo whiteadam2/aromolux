@@ -1,27 +1,27 @@
-import React from "react";
-import { IProduct, IOrder } from "../@types";
-import { useAppSelector, useAppDispatch } from "../hooks/redux";
-import { addProduct, removeProduct } from "../redux/cartSlice";
+import React from 'react'
+import { IProduct, IOrder } from '../@types'
+import { useAppSelector, useAppDispatch } from '../hooks/redux'
+import { addProduct, removeProduct } from '../redux/cartSlice'
 
 interface ProductProps {
-  data: IProduct;
+  data: IProduct
 }
 
-export function Product({ data }: ProductProps) {
-  const dispatch = useAppDispatch();
+export const Product: React.FC<ProductProps> = ({ data }) => {
+  const dispatch = useAppDispatch()
 
-  const orders = useAppSelector((state) => state.cart.orders);
-  const productInCart = orders.find((order: IOrder) => order.id === data.id);
+  const orders = useAppSelector((state) => state.cart.orders)
+  const productInCart = orders.find((order: IOrder) => order.id === data.id)
 
-  const handleClickAdd = (data: IProduct) => {
-    dispatch(addProduct(data));
-    window.Telegram.WebApp.HapticFeedback.impactOccurred("medium");
-  };
+  const handleClickAdd = (data: IProduct): void => {
+    dispatch(addProduct(data))
+    window.Telegram.WebApp.HapticFeedback.impactOccurred('medium')
+  }
 
-  const handleClickRemove = (id: string) => {
-    dispatch(removeProduct(id));
-    window.Telegram.WebApp.HapticFeedback.impactOccurred("medium");
-  };
+  const handleClickRemove = (id: string): void => {
+    dispatch(removeProduct(id))
+    window.Telegram.WebApp.HapticFeedback.impactOccurred('medium')
+  }
 
   return (
     <div className="flex flex-col items-center w-40">
@@ -30,7 +30,7 @@ export function Product({ data }: ProductProps) {
       </h2>
       <div className="w-40 h-40 relative border-solid border-2 border-amber-400 rounded-md">
         <img src={data.picture} alt={data.name} className="rounded-md" />
-        {productInCart && (
+        {productInCart != null && (
           <div className="absolute -top-3.5 -right-3.5 w-7 h-7 rounded-full bg-red-400 flex justify-center items-center text-white shadow-md">
             {productInCart.count}
           </div>
@@ -40,7 +40,8 @@ export function Product({ data }: ProductProps) {
         <span className="line-through">{data.oldprice} руб.</span>
         <span className="text-red-400 font-semibold">{data.price} руб.</span>
       </p>
-      {productInCart ? (
+      {productInCart != null
+        ? (
         <div className="flex justify-center gap-x-2">
           <div
             className="px-4 py-1.5 flex justify-center items-center shadow-md cursor-pointer
@@ -57,7 +58,8 @@ export function Product({ data }: ProductProps) {
             +
           </div>
         </div>
-      ) : (
+          )
+        : (
         <div
           className="px-4 py-1.5 flex justify-center items-center shadow-md cursor-pointer
            select-none text-white bg-blue-500 text-xl font-normal rounded-xl"
@@ -65,7 +67,7 @@ export function Product({ data }: ProductProps) {
         >
           В корзину
         </div>
-      )}
+          )}
     </div>
-  );
+  )
 }

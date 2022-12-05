@@ -1,14 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import { BrowserRouter } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import { BrowserRouter } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-const element = document.getElementById("root");
-const queryClient = new QueryClient();
+const element = document.getElementById('root')
+const queryClient = new QueryClient()
 
-if (element) {
-  const root = ReactDOM.createRoot(element);
+if (element != null) {
+  const root = ReactDOM.createRoot(element)
 
   root.render(
     <React.StrictMode>
@@ -18,5 +18,5 @@ if (element) {
         </QueryClientProvider>
       </BrowserRouter>
     </React.StrictMode>
-  );
+  )
 }

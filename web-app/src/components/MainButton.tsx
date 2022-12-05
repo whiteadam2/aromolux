@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react'
 
-const tgApp = window.Telegram.WebApp;
+const tgApp = window.Telegram.WebApp
 
 interface ButtonProps {
-  label: string;
-  onClick: React.MouseEventHandler<HTMLDivElement>;
+  label: string
+  onClick: React.MouseEventHandler<HTMLDivElement>
 }
 
-function WebMainButton({ label, onClick }: ButtonProps) {
+const WebMainButton: React.FC<ButtonProps> = ({ label, onClick }) => {
   return (
     <div
       onClick={onClick}
@@ -15,35 +15,37 @@ function WebMainButton({ label, onClick }: ButtonProps) {
     >
       {label}
     </div>
-  );
+  )
 }
 
-function TelegramMainButton({ label, onClick }: ButtonProps) {
+const TelegramMainButton: React.FC<ButtonProps> = ({ label, onClick }) => {
   useEffect(() => {
-    tgApp.MainButton.show();
-    return () => tgApp.MainButton.hide();
-  }, []);
+    tgApp.MainButton.show()
+    return () => tgApp.MainButton.hide()
+  }, [])
 
   useEffect(() => {
-    tgApp.MainButton.setText(label);
-  }, [label]);
+    tgApp.MainButton.setText(label)
+  }, [label])
 
   useEffect(() => {
-    window.Telegram.WebApp.MainButton.onClick(onClick);
-    return () => window.Telegram.WebApp.MainButton.offClick(onClick);
-  }, [onClick]);
+    window.Telegram.WebApp.MainButton.onClick(onClick)
+    return () => window.Telegram.WebApp.MainButton.offClick(onClick)
+  }, [onClick])
 
-  return null;
+  return null
 }
 
-export function MainButton(props: ButtonProps) {
+export const MainButton: React.FC<ButtonProps> = (props) => {
   return (
     <>
-      {tgApp.platform !== "unknown" ? (
+      {tgApp.platform !== 'unknown'
+        ? (
         <TelegramMainButton {...props} />
-      ) : (
+          )
+        : (
         <WebMainButton {...props} />
-      )}
+          )}
     </>
-  );
+  )
 }

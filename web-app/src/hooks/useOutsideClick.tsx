@@ -1,19 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react'
 
-export function useOutsideClick(
+export function useOutsideClick (
   ref: React.RefObject<HTMLElement>,
   callback: () => void
-) {
-  function handleClick(event: MouseEvent) {
-    if (ref.current && !ref.current.contains(event.target as Node)) {
-      callback();
+): void {
+  function handleClick (event: MouseEvent): void {
+    if ((ref.current != null) && !ref.current.contains(event.target as Node)) {
+      callback()
     }
   }
 
   useEffect(() => {
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
     // eslint-disable-next-line
   }, []);
-  return null;
 }

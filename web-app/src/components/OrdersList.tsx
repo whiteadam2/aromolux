@@ -1,13 +1,13 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { ICart } from "../@types";
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ICart } from '../@types'
 
 interface OrdersListProps {
-  cart: ICart;
+  cart: ICart
 }
 
-export function OrdersList({ cart }: OrdersListProps) {
-  const navigate = useNavigate();
+export const OrdersList: React.FC<OrdersListProps> = ({ cart }) => {
+  const navigate = useNavigate()
 
   return (
     <>
@@ -42,5 +42,5 @@ export function OrdersList({ cart }: OrdersListProps) {
       ))}
       <div className="text-right font-semibold">{`Итого ${cart.total} руб.`}</div>
     </>
-  );
+  )
 }

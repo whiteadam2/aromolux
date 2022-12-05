@@ -1,14 +1,14 @@
-import React from "react";
-import { store } from "./redux/store";
-import { Route, Routes, Navigate } from "react-router-dom";
-import { Products } from "./components/Products";
-import { Cart } from "./components/Cart";
-import { Provider } from "react-redux";
-import { ContentLayout } from "./components/ContentLayout";
-import { GlobalLayout } from "./components/GlobalLayout";
-import "./App.css";
+import React from 'react'
+import { store } from './redux/store'
+import { Route, Routes, Navigate } from 'react-router-dom'
+import { Products } from './components/Products'
+import { Cart } from './components/Cart'
+import { Provider } from 'react-redux'
+import { ContentLayout } from './components/ContentLayout'
+import { GlobalLayout } from './components/GlobalLayout'
+import './App.css'
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
   return (
     <Provider store={store}>
       <Routes>
@@ -21,7 +21,7 @@ const App: React.FC = () => {
         </Route>
       </Routes>
     </Provider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

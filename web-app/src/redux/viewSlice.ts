@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IProduct, IViewState } from "../@types";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { IProduct, IViewState } from '../@types'
 
 const initialState: IViewState = {
   paginatedData: [],
@@ -7,33 +7,33 @@ const initialState: IViewState = {
   pageSize: 8,
   totalCount: 0,
   sortValue: 0,
-  searchValue: "",
-};
+  searchValue: ''
+}
 
 export const viewSlice = createSlice({
-  name: "view",
+  name: 'view',
   initialState,
   reducers: {
     setPaginatedData: (state, action: PayloadAction<IProduct[]>) => {
-      state.paginatedData = action.payload;
+      state.paginatedData = action.payload
     },
     setCurrentPage: (state, action: PayloadAction<number>) => {
-      state.currentPage = action.payload;
+      state.currentPage = action.payload
     },
     setPageSize: (state, action: PayloadAction<number>) => {
-      state.pageSize = action.payload;
+      state.pageSize = action.payload
     },
     setTotalCount: (state, action: PayloadAction<number>) => {
-      state.totalCount = action.payload;
+      state.totalCount = action.payload
     },
     setSortValue: (state, action: PayloadAction<number>) => {
-      state.sortValue = action.payload;
+      state.sortValue = action.payload
     },
     setSearchValue: (state, action: PayloadAction<string>) => {
-      state.searchValue = action.payload;
-    },
-  },
-});
+      state.searchValue = action.payload
+    }
+  }
+})
 
 export const {
   setPaginatedData,
@@ -41,7 +41,7 @@ export const {
   setPageSize,
   setTotalCount,
   setSortValue,
-  setSearchValue,
-} = viewSlice.actions;
+  setSearchValue
+} = viewSlice.actions
 
-export default viewSlice.reducer;
+export default viewSlice.reducer

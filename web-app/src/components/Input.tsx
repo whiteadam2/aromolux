@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 interface InputProps {
-  value: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
-  placeholder: string;
-  isFocused?: boolean;
+  value: string
+  onChange: React.ChangeEventHandler<HTMLInputElement>
+  placeholder: string
+  isFocused?: boolean
 }
 
-export function Input({ value, onChange, placeholder, isFocused }: InputProps) {
-  const [changed, setChanged] = useState(false);
+export const Input: React.FC<InputProps> = ({
+  value,
+  onChange,
+  placeholder,
+  isFocused
+}) => {
+  const [changed, setChanged] = useState(false)
   return (
     <>
       <input
@@ -20,11 +25,11 @@ export function Input({ value, onChange, placeholder, isFocused }: InputProps) {
         value={value}
         onChange={onChange}
       />
-      {changed && !value && (
+      {changed && value === '' && (
         <span className="text-red-500 font-light text-sm -mt-3">
           обязательно к заполнению!
         </span>
       )}
     </>
-  );
+  )
 }

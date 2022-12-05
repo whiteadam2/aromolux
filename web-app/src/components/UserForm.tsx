@@ -1,34 +1,34 @@
-import React, { useState } from "react";
-import { Input } from "./Input";
-import { MainButton } from "./MainButton";
-import { sendToShop, sendToBot } from "../api/sendOrders";
-import { IOrder } from "../@types";
+import React, { useState } from 'react'
+import { Input } from './Input'
+import { MainButton } from './MainButton'
+import { sendToShop, sendToBot } from '../api/sendOrders'
+import { IOrder } from '../@types'
 
 interface UserFormProps {
-  orders: IOrder[];
+  orders: IOrder[]
 }
 
-export function UserForm({ orders }: UserFormProps) {
-  const [name, setName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+export const UserForm: React.FC<UserFormProps> = ({ orders }) => {
+  const [name, setName] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
 
-  async function handleMainButtonClick() {
-    if (!name || !phoneNumber) return;
+  async function handleMainButtonClick (): Promise<void> {
+    if (name === '' || phoneNumber === '') return
 
     const data = orders.map((order) => ({
       productId: order.id,
-      quantity: order.count,
-    }));
+      quantity: order.count
+    }))
 
-    const tgApp = window.Telegram.WebApp;
-    const queryId = tgApp.initDataUnsafe?.query_id;
+    const tgApp = window.Telegram.WebApp
+    const queryId = tgApp.initDataUnsafe?.query_id
 
-    if (queryId) {
-      await sendToShop(data, name, phoneNumber);
-      await sendToBot(orders, queryId);
+    if (queryId !== undefined) {
+      await sendToShop(data, name, phoneNumber)
+      await sendToBot(orders, queryId)
     }
 
-    tgApp.close();
+    tgApp.close()
   }
 
   return (
@@ -48,9 +48,9 @@ export function UserForm({ orders }: UserFormProps) {
         />
       </div>
       <MainButton
-        label={"Подтвердить заказ!"}
+        label={'Подтвердить заказ!'}
         onClick={handleMainButtonClick}
       />
     </>
-  );
+  )
 }

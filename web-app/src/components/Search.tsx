@@ -1,15 +1,15 @@
-import React from "react";
-import { useAppDispatch } from "../hooks/redux";
-import { setSearchValue } from "../redux/viewSlice";
-import { useDebounce } from "../hooks";
+import React from 'react'
+import { useAppDispatch } from '../hooks/redux'
+import { setSearchValue } from '../redux/viewSlice'
+import { useDebounce } from '../hooks'
 
-export function Search() {
-  const dispatch = useAppDispatch();
+export const Search: React.FC = () => {
+  const dispatch = useAppDispatch()
 
   const [immediateSearchValue, setImmediateSearchValue] = useDebounce(
     () => dispatch(setSearchValue(immediateSearchValue)),
     500
-  );
+  )
 
   return (
     <div className="relative">
@@ -29,8 +29,8 @@ export function Search() {
         src="/images/search_clear.svg"
         alt="Clean up search!"
         className="w-4 h-4 absolute top-2 right-2 cursor-pointer opacity-30 hover:opacity-100"
-        onClick={() => setImmediateSearchValue("")}
+        onClick={() => setImmediateSearchValue('')}
       />
     </div>
-  );
+  )
 }
