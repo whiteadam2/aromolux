@@ -12,7 +12,7 @@ export const UserForm: React.FC<UserFormProps> = ({ orders }) => {
   const [name, setName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
 
-  async function handleMainButtonClick (): Promise<void> {
+  async function handleMainButtonClick(): Promise<void> {
     if (name === '' || phoneNumber === '') return
 
     const data = orders.map((order) => ({

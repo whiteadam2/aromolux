@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios'
 import { IOrder, IShopOrder } from '../@types'
 
-export async function sendToShop (
+export async function sendToShop(
   data: IShopOrder[],
   name: string,
   phoneNumber: string
@@ -18,7 +18,7 @@ export async function sendToShop (
   )
 }
 
-export async function sendToBot (
+export async function sendToBot(
   orders: IOrder[],
   queryId: string
 ): Promise<AxiosResponse> {

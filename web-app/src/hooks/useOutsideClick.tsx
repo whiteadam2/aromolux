@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 
-export function useOutsideClick (
+export function useOutsideClick(
   ref: React.RefObject<HTMLElement>,
   callback: () => void
 ): void {
-  function handleClick (event: MouseEvent): void {
-    if ((ref.current != null) && !ref.current.contains(event.target as Node)) {
+  function handleClick(event: MouseEvent): void {
+    if (ref.current != null && !ref.current.contains(event.target as Node)) {
       callback()
     }
   }
@@ -14,5 +14,5 @@ export function useOutsideClick (
     document.addEventListener('click', handleClick)
     return () => document.removeEventListener('click', handleClick)
     // eslint-disable-next-line
-  }, []);
+  }, [])
 }

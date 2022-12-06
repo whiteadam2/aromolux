@@ -18,7 +18,7 @@ const initialState: IProductsState = {
 
 export const fetchProducts = createAsyncThunk(
   'fetchProducts',
-  async (categoryId: number): Promise<IProduct[]> => {
+  async(categoryId: number): Promise<IProduct[]> => {
     if (products.length === 0) {
       const { data } = await axios.get<string>(
         'https://aromomama.ru/yandex.xml'

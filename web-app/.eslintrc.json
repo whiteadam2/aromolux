@@ -18,15 +18,15 @@
         "react"
     ],
     "rules": {
-    "@typescript-eslint/no-misused-promises": [
+        "@typescript-eslint/no-misused-promises": [
         "error",
         {
             "checksVoidReturn": {
             "arguments": false,
             "attributes": false
              }
-        }
-    ]
+        }],
+        "@typescript-eslint/space-before-function-paren": ["error", "never"]
     },
     "settings": {
         "react": {

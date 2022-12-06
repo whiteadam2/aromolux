@@ -13,7 +13,7 @@ export const Sort: React.FC = () => {
   const sortRef = useRef<HTMLDivElement>(null)
   useOutsideClick(sortRef, () => setIsVisible(false))
 
-  function handleSortClick (index: number): void {
+  function handleSortClick(index: number): void {
     dispatch(setSortValue(index))
     setIsVisible(false)
   }
