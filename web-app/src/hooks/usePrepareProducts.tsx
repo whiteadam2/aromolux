@@ -3,13 +3,13 @@ import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import {
   setPaginatedData,
   setCurrentPage,
-  setTotalCount,
+  setTotalCount
 } from '../redux/viewSlice'
 import { IProduct } from '../@types'
 
 export function usePrepareProducts(data: IProduct[] | null): void {
   const dispatch = useAppDispatch()
-  const { currentPage, pageSize, sortValue, searchValue } = useAppSelector(
+  const { currentPage, pageSize, sortProp, searchValue } = useAppSelector(
     (state) => state.view
   )
 
@@ -20,22 +20,10 @@ export function usePrepareProducts(data: IProduct[] | null): void {
   }
 
   function sort(data: IProduct[]): IProduct[] {
-    let sortProp: null | 'price' | 'name' = null
-
-    switch (sortValue) {
-      case 1:
-        sortProp = 'price'
-        break
-      case 2:
-        sortProp = 'name'
-    }
-
-    const result: IProduct[] =
-      sortProp !== null
-        ? [...data].sort((prev, next) => prev[sortProp] - next[sortProp])
-        : [...data]
-
-    return result
+    if (sortProp === null) return data
+    return [...data].sort((prev, next) =>
+      prev[sortProp] > next[sortProp] ? 1 : -1
+    )
   }
 
   function search(data: IProduct[]): IProduct[] {
@@ -52,10 +40,10 @@ export function usePrepareProducts(data: IProduct[] | null): void {
       dispatch(setPaginatedData(paginate(searchedData)))
     }
     // eslint-disable-next-line
-  }, [data, sortValue, searchValue, currentPage])
+  }, [data, sortProp, searchValue, currentPage])
 
   useEffect(() => {
     dispatch(setCurrentPage(1))
     // eslint-disable-next-line
-  }, [data, sortValue, searchValue])
+  }, [data, sortProp, searchValue])
 }

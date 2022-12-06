@@ -44,6 +44,6 @@ export interface IViewState {
   currentPage: number
   pageSize: number
   totalCount: number
-  sortValue: number
+  sortProp: null | keyof IProduct
   searchValue: string
 }

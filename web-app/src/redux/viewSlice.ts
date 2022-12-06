@@ -6,7 +6,7 @@ const initialState: IViewState = {
   currentPage: 1,
   pageSize: 8,
   totalCount: 0,
-  sortValue: 0,
+  sortProp: null,
   searchValue: ''
 }
 
@@ -26,8 +26,8 @@ export const viewSlice = createSlice({
     setTotalCount: (state, action: PayloadAction<number>) => {
       state.totalCount = action.payload
     },
-    setSortValue: (state, action: PayloadAction<number>) => {
-      state.sortValue = action.payload
+    setSortProp: (state, action: PayloadAction<keyof IProduct | null>) => {
+      state.sortProp = action.payload
     },
     setSearchValue: (state, action: PayloadAction<string>) => {
       state.searchValue = action.payload
@@ -40,7 +40,7 @@ export const {
   setCurrentPage,
   setPageSize,
   setTotalCount,
-  setSortValue,
+  setSortProp,
   setSearchValue
 } = viewSlice.actions
 
