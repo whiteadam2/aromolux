@@ -39,11 +39,9 @@ export function usePrepareProducts(data: IProduct[] | null): void {
       dispatch(setTotalCount(searchedData.length))
       dispatch(setPaginatedData(paginate(searchedData)))
     }
-    // eslint-disable-next-line
   }, [data, sortProp, searchValue, currentPage])
 
   useEffect(() => {
     dispatch(setCurrentPage(1))
-    // eslint-disable-next-line
   }, [data, sortProp, searchValue])
 }

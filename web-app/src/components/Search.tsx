@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAppDispatch } from '../hooks/redux'
 import { setSearchValue } from '../redux/viewSlice'
 import { useDebounce } from '../hooks'
@@ -10,6 +10,10 @@ export const Search: React.FC = () => {
     () => dispatch(setSearchValue(immediateSearchValue)),
     500
   )
+
+  useEffect(() => {
+    dispatch(setSearchValue(''))
+  }, [])
 
   return (
     <div className="relative">

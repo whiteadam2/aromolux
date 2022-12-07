@@ -9,8 +9,7 @@ export function useDebounce(
   useEffect(() => {
     const timeout = setTimeout(func, ms)
     return () => clearTimeout(timeout)
-    // eslint-disable-next-line
-  }, [immediateValue]);
+  }, [immediateValue])
 
   return [immediateValue, setImmediateValue]
 }
