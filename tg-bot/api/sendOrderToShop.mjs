@@ -2,7 +2,8 @@ import axios from "axios";
 import * as dotenv from "dotenv";
 
 dotenv.config();
-const shopUrl = process.env.PASSING_ORDER_URL;
+const shopUrl = process.env.PASSING_ORDER_BASE_URL;
+const token = process.env.PASSING_ORDER_TOKEN;
 
 /**
  *
@@ -15,7 +16,10 @@ const shopUrl = process.env.PASSING_ORDER_URL;
  */
 
 export async function sendOrderToShop(order) {
-  console.log(shopUrl);
-  console.log(order);
-  return await axios.post(shopUrl, order);
+  return await axios.post(shopUrl, order, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    params: { token_key: token },
+  });
 }

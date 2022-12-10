@@ -26,9 +26,9 @@ export const UserForm: React.FC<UserFormProps> = ({ cart }) => {
     const tgApp = window.Telegram.WebApp
     const queryId = tgApp.initDataUnsafe?.query_id
 
-    //  if (queryId !== undefined) {
-    await sendOrderToBot(botOrder, queryId)
-    //  }
+    if (queryId !== undefined) {
+      await sendOrderToBot(botOrder, queryId)
+    }
 
     tgApp.close()
   }

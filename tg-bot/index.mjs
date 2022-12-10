@@ -57,32 +57,17 @@ app.post("/bot", async (req, res) => {
   console.log("Managing by Bot... queryId:", queryId);
 
   try {
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    const response = await axios.post(
-      "https://aromomama.ru/telapi/?token_key=d1994656fbfdb6d627b",
-      {
-        cart: [
-          { productId: "2678", quantity: 1 },
-          { productId: "2417", quantity: 2 },
-          { productId: "2427", quantity: 2 },
-        ],
-        user: { name: "Alex", phoneNumber: "111" },
-      },
-      { headers }
-    );
-
-    console.log(response);
-    /*await sendOrderToShop(order);
-       await bot.answerWebAppQuery(queryId, {
+    const shopResponse = await sendOrderToShop(order);
+    const botResponse = await bot.answerWebAppQuery(queryId, {
       type: "article",
       id: queryId,
       title: "Успешная покупка",
       input_message_content: { message_text: message },
-    });*/
-    return res.status(200).send();
+    });
+
+    return res
+      .status(200)
+      .json({ response: { shop: shopResponse.data, bot: botResponse.data } });
   } catch (e) {
     return res.status(500).send(e);
   }
