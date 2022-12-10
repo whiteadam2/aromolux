@@ -4,6 +4,7 @@ import express from "express";
 import cors from "cors";
 import { sendOrderToShop } from "./api/sendOrderToShop.mjs";
 import { orderFromData, messageFromData } from "./utils/convertWebAppData.mjs";
+import axios from "axios";
 
 const app = express();
 app.use(express.json());
@@ -46,6 +47,8 @@ app.listen(process.env.PORT, () =>
   console.log(`Listening port ${process.env.PORT}...`)
 );
 
+app.get("/", (req, res) => res.send("Web service is working..."));
+
 app.post("/bot", async (req, res) => {
   const { queryId, data } = req.body;
   const order = orderFromData(data);
@@ -54,16 +57,33 @@ app.post("/bot", async (req, res) => {
   console.log("Managing by Bot... queryId:", queryId);
 
   try {
-    await sendOrderToShop(order);
-    await bot.answerWebAppQuery(queryId, {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    const response = await axios.post(
+      "https://aromomama.ru/telapi/?token_key=d1994656fbfdb6d627b",
+      {
+        cart: [
+          { productId: "2678", quantity: 1 },
+          { productId: "2417", quantity: 2 },
+          { productId: "2427", quantity: 2 },
+        ],
+        user: { name: "Alex", phoneNumber: "111" },
+      },
+      { headers }
+    );
+
+    console.log(response);
+    /*await sendOrderToShop(order);
+       await bot.answerWebAppQuery(queryId, {
       type: "article",
       id: queryId,
       title: "Успешная покупка",
       input_message_content: { message_text: message },
-    });
+    });*/
     return res.status(200).send();
   } catch (e) {
-    console.log(e.response.body.description);
-    return res.status(500).send(e.response.body.description);
+    return res.status(500).send(e);
   }
 });

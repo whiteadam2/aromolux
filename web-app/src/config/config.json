@@ -1,4 +1,4 @@
 {
   "feedURL": "https://aromomama.ru/yandex.xml",
-  "tgBotWebServer": "https://aromomania.ru/bot"
+  "tgBotWebServer": "http://localhost:3020/bot"
 }

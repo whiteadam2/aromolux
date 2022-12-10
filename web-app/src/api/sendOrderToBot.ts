@@ -4,7 +4,7 @@ import config from '../config/config.json'
 
 export async function sendOrderToBot(
   data: IBotOrder,
-  queryId: string
+  queryId?: string
 ): Promise<AxiosResponse> {
   return await axios({
     url: config.tgBotWebServer,

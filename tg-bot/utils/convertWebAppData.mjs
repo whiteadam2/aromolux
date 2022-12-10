@@ -29,16 +29,16 @@ export function messageFromData(data) {
 /**
  *
  * @param {WebAppData} data
- * @returns {{user, products: {quantity: *, productId: *}[]}}
+ * @returns {{user, cart: {quantity: *, productId: *}[]}}
  */
 
 export function orderFromData(data) {
-  const products = data.cart.orders.map((order) => ({
+  const cart = data.cart.orders.map((order) => ({
     productId: order.id,
     quantity: order.count,
   }));
   return {
-    products,
+    cart,
     user: data.user,
   };
 }
