@@ -9,7 +9,7 @@ export const Cart: React.FC = () => {
   return (
     <div className="mx-10 ">
       <OrdersList cart={cart} />
-      <UserForm orders={cart.orders} />
+      <UserForm cart={cart} />
     </div>
   )
 }

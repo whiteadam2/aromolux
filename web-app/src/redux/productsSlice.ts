@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { XMLParser } from 'fast-xml-parser'
 import { IProductXML, IProduct, IProductsState } from '../@types'
+import { feedURL } from '../../config/config.json'
 
 const parser = new XMLParser({
   ignoreAttributes: false,
@@ -18,11 +19,9 @@ const initialState: IProductsState = {
 
 export const fetchProducts = createAsyncThunk(
   'fetchProducts',
-  async(categoryId: number): Promise<IProduct[]> => {
+  async (categoryId: number): Promise<IProduct[]> => {
     if (products.length === 0) {
-      const { data } = await axios.get<string>(
-        'https://aromomama.ru/yandex.xml'
-      )
+      const { data } = await axios.get<string>(feedURL)
       products = parser.parse(data).yml_catalog.shop.offers.offer
     }
 

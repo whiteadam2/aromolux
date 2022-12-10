@@ -2,6 +2,8 @@ import * as dotenv from "dotenv";
 import TelegramBot from "node-telegram-bot-api";
 import express from "express";
 import cors from "cors";
+import { sendOrderToShop } from "./api/sendOrderToShop.mjs";
+import { orderFromData, messageFromData } from "./utils/convertWebAppData.mjs";
 
 const app = express();
 app.use(express.json());
@@ -9,6 +11,7 @@ app.use(cors());
 
 dotenv.config();
 const token = process.env.TELEGRAM_TOKEN;
+const webAppUrl = process.env.WEB_APP_URL;
 const bot = new TelegramBot(token, { polling: true });
 
 bot.on("message", async (msg) => {
@@ -26,7 +29,7 @@ bot.on("message", async (msg) => {
               [
                 {
                   text: "Перейти",
-                  web_app: { url: "https://aromomania.ru/" },
+                  web_app: { url: webAppUrl },
                 },
               ],
             ],
@@ -44,18 +47,14 @@ app.listen(process.env.PORT, () =>
 );
 
 app.post("/bot", async (req, res) => {
-  const { queryId, orders } = req.body;
-
-  const message = `Ваш заказ:\n\n${orders
-    .map((product) => `${product.name} - ${product.count} шт.`)
-    .join("\n")}\n\nИтого: ${orders.reduce(
-    (acc, order) => acc + order.price,
-    0
-  )} рублей!\n\nОжидайте, с Вами свяжется менеджер!`;
+  const { queryId, data } = req.body;
+  const order = orderFromData(data);
+  const message = messageFromData(data);
 
   console.log("Managing by Bot... queryId:", queryId);
 
   try {
+    await sendOrderToShop(order);
     await bot.answerWebAppQuery(queryId, {
       type: "article",
       id: queryId,

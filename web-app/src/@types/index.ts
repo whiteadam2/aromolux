@@ -28,9 +28,9 @@ export interface ICart {
   total: number
 }
 
-export interface IShopOrder {
-  productId: string
-  quantity: number
+export interface IBotOrder {
+  cart: ICart
+  user: { name: string; phoneNumber: string }
 }
 
 export interface IProductsState {

@@ -1,31 +1,33 @@
 import React, { useState } from 'react'
 import { Input } from './Input'
 import { MainButton } from './MainButton'
-import { sendToShop, sendToBot } from '../api/sendOrders'
-import { IOrder } from '../@types'
+import { sendOrderToBot } from '../api/sendOrderToBot'
+import { IBotOrder, ICart } from '../@types'
 
 interface UserFormProps {
-  orders: IOrder[]
+  cart: ICart
 }
 
-export const UserForm: React.FC<UserFormProps> = ({ orders }) => {
+export const UserForm: React.FC<UserFormProps> = ({ cart }) => {
   const [name, setName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
 
   async function handleMainButtonClick(): Promise<void> {
     if (name === '' || phoneNumber === '') return
 
-    const data = orders.map((order) => ({
-      productId: order.id,
-      quantity: order.count
-    }))
+    const botOrder: IBotOrder = {
+      cart,
+      user: {
+        name,
+        phoneNumber
+      }
+    }
 
     const tgApp = window.Telegram.WebApp
     const queryId = tgApp.initDataUnsafe?.query_id
 
     if (queryId !== undefined) {
-      await sendToShop(data, name, phoneNumber)
-      await sendToBot(orders, queryId)
+      await sendOrderToBot(botOrder, queryId)
     }
 
     tgApp.close()

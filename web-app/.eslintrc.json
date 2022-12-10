@@ -26,7 +26,22 @@
             "attributes": false
              }
         }],
-        "@typescript-eslint/space-before-function-paren": ["error", "never"]
+        "@typescript-eslint/space-before-function-paren": ["error", {
+            "anonymous": "always",
+            "named": "never",
+            "asyncArrow": "always"
+        }],
+        "@typescript-eslint/member-delimiter-style": ["error", {
+            "multiline": {
+                "delimiter": "none",
+                "requireLast": true
+            },
+            "singleline": {
+                "delimiter": "semi",
+                "requireLast": false
+            }
+        }]
+
     },
     "settings": {
         "react": {
