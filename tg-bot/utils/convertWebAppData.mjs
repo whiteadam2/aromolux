@@ -21,7 +21,7 @@ export function messageFromData(data) {
   return `Ваш заказ:\n\n${products
     .map((product) => `${product.name} - ${product.count} шт.`)
     .join("\n")}\n\nИтого: ${products.reduce(
-    (acc, order) => acc + order.price,
+    (acc, product) => acc + product.price * product.count,
     0
   )} рублей!\n\nОжидайте, с Вами свяжется менеджер!`;
 }
