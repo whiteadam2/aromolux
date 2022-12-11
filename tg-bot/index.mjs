@@ -1,19 +1,13 @@
-import * as dotenv from "dotenv";
 import TelegramBot from "node-telegram-bot-api";
 import express from "express";
 import cors from "cors";
+import * as ConfigContainer from "./config/index.cjs";
 import { sendOrderToShop } from "./api/sendOrderToShop.mjs";
 import { orderFromData, messageFromData } from "./utils/convertWebAppData.mjs";
-import axios from "axios";
 
-const app = express();
-app.use(express.json());
-app.use(cors());
-
-dotenv.config();
-const token = process.env.TELEGRAM_TOKEN;
-const webAppUrl = process.env.WEB_APP_URL;
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(ConfigContainer.config.tg.botToken, {
+  polling: true,
+});
 
 bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
@@ -30,7 +24,7 @@ bot.on("message", async (msg) => {
               [
                 {
                   text: "Перейти",
-                  web_app: { url: webAppUrl },
+                  web_app: { url: ConfigContainer.config.tg.webAppUrl },
                 },
               ],
             ],
@@ -43,8 +37,12 @@ bot.on("message", async (msg) => {
   }
 });
 
-app.listen(process.env.PORT, () =>
-  console.log(`Listening port ${process.env.PORT}...`)
+const app = express();
+app.use(express.json());
+app.use(cors());
+
+app.listen(ConfigContainer.config.port, () =>
+  console.log(`Listening port ${ConfigContainer.config.port}...`)
 );
 
 app.get("/", (req, res) => res.send("Web service is working..."));
