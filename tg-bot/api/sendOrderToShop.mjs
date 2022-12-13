@@ -1,9 +1,8 @@
 import axios from "axios";
-import * as dotenv from "dotenv";
+import * as ConfigContainer from "../config/index.cjs";
 
-dotenv.config();
-const shopUrl = process.env.PASSING_ORDER_BASE_URL;
-const token = process.env.PASSING_ORDER_TOKEN;
+const shopUrl = ConfigContainer.config.ordersProcessing.baseURL;
+const token = ConfigContainer.config.ordersProcessing.token;
 
 /**
  *
