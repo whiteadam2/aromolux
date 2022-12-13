@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Input } from './Input'
 import { MainButton } from './MainButton'
 import { IBotOrder, ICart } from '../@types'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { processOrder } from '../redux/sendOrderSlice'
 import { Alert } from './Alert'
 
@@ -14,7 +14,9 @@ export const UserForm: React.FC<UserFormProps> = ({ cart }) => {
   const [name, setName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const dispatch = useAppDispatch()
-  const { isPending, error } = useAppSelector((state) => state.botOrder)
+  const { isPending, error, success } = useAppSelector(
+    (state) => state.botOrder
+  )
 
   async function handleMainButtonClick(): Promise<void> {
     if (name === '' || phoneNumber === '') return
@@ -31,9 +33,8 @@ export const UserForm: React.FC<UserFormProps> = ({ cart }) => {
     const queryId = tgApp.initDataUnsafe?.query_id
 
     if (queryId !== undefined) {
-      dispatch(processOrder(botOrder, queryId))
-        .then(() => tgApp.close())
-        .catch((e) => console.log(e))
+      dispatch(processOrder(botOrder, queryId)).catch((e) => console.log(e))
+      tgApp.close()
     }
   }
 
@@ -59,6 +60,7 @@ export const UserForm: React.FC<UserFormProps> = ({ cart }) => {
         disabled={isPending}
       />
       {error !== null && <Alert message={error.message} />}
+      {success !== null && <Alert message={JSON.stringify(success)} />}
     </>
   )
 }
