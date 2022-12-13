@@ -15,6 +15,7 @@ const token = ConfigContainer.config.ordersProcessing.token;
  */
 
 export async function sendOrderToShop(order) {
+  throw new Error("@@@@@");
   return await axios.post(shopUrl, order, {
     headers: {
       "Content-Type": "application/json",
