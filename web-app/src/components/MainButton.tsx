@@ -39,13 +39,11 @@ const TelegramMainButton: React.FC<ButtonProps> = ({ label, onClick }) => {
 export const MainButton: React.FC<ButtonProps> = (props) => {
   return (
     <>
-      {tgApp.platform !== 'unknown'
-        ? (
+      {tgApp.platform !== 'unknown' ? (
         <TelegramMainButton {...props} />
-          )
-        : (
+      ) : (
         <WebMainButton {...props} />
-          )}
+      )}
     </>
   )
 }

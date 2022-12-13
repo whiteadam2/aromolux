@@ -43,15 +43,13 @@ export const Products: React.FC = () => {
       )}
 
       <div className="flex flex-wrap justify-center gap-y-20 gap-x-8 mb-20">
-        {isLoading && !isError
-          ? (
+        {isLoading && !isError ? (
           <ProductsSkeleton amount={8} />
-            )
-          : (
-              paginatedData.map((product: IProduct) => (
+        ) : (
+          paginatedData.map((product: IProduct) => (
             <Product key={product.id} data={product} />
-              ))
-            )}
+          ))
+        )}
         {isError && (
           <div>
             <p className="text-xl w-80 text-center mt-20">

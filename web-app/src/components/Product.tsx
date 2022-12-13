@@ -40,8 +40,7 @@ export const Product: React.FC<ProductProps> = ({ data }) => {
         <span className="line-through">{data.oldprice} руб.</span>
         <span className="text-red-400 font-semibold">{data.price} руб.</span>
       </p>
-      {productInCart != null
-        ? (
+      {productInCart != null ? (
         <div className="flex justify-center gap-x-2">
           <div
             className="px-4 py-1.5 flex justify-center items-center shadow-md cursor-pointer
@@ -58,8 +57,7 @@ export const Product: React.FC<ProductProps> = ({ data }) => {
             +
           </div>
         </div>
-          )
-        : (
+      ) : (
         <div
           className="px-4 py-1.5 flex justify-center items-center shadow-md cursor-pointer
            select-none text-white bg-blue-500 text-xl font-normal rounded-xl"
@@ -67,7 +65,7 @@ export const Product: React.FC<ProductProps> = ({ data }) => {
         >
           В корзину
         </div>
-          )}
+      )}
     </div>
   )
 }

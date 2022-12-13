@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Input } from './Input'
 import { MainButton } from './MainButton'
-import { sendOrderToBot } from '../api/sendOrderToBot'
 import { IBotOrder, ICart } from '../@types'
 
 interface UserFormProps {
@@ -27,7 +26,7 @@ export const UserForm: React.FC<UserFormProps> = ({ cart }) => {
     const queryId = tgApp.initDataUnsafe?.query_id
 
     if (queryId !== undefined) {
-      await sendOrderToBot(botOrder, queryId)
+      console.log(botOrder, queryId)
     }
 
     tgApp.close()

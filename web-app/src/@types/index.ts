@@ -47,3 +47,9 @@ export interface IViewState {
   sortProp: null | keyof IProduct
   searchValue: string
 }
+
+export interface ISendOrderState {
+  isPending: boolean
+  error: any
+  success: any
+}
