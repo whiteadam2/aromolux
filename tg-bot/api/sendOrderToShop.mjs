@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as ConfigContainer from "../config/index.cjs";
 
-const shopUrl = ConfigContainer.config.ordersProcessing.baseURL;
+const shopUrl = ConfigContainer.config.ordersProcessing.baseUrl;
 const token = ConfigContainer.config.ordersProcessing.token;
 
 /**
@@ -15,10 +15,6 @@ const token = ConfigContainer.config.ordersProcessing.token;
  */
 
 export async function sendOrderToShop(order) {
-  console.log(shopUrl);
-  console.log(token);
-  console.log(order);
-
   return await axios.post(shopUrl, order, {
     headers: {
       "Content-Type": "application/json",
