@@ -63,8 +63,6 @@ app.post("/bot", async (req, res) => {
       input_message_content: { message_text: message },
     });
 
-    throw new Error("Error message!");
-
     return res
       .status(200)
       .json({ response: { shop: shopResponse.data, bot: botResponse.data } });

@@ -26,6 +26,7 @@ export const processOrder =
   (data: IBotOrder, queryId?: string) => async (dispatch: AppDispatch) => {
     dispatch(setPendingStatus(true))
     try {
+      throw new Error('Error message!')
       const response = await sendOrderToBot(data, queryId)
       dispatch(setPendingStatus(false))
       dispatch(setSuccess(response))
