@@ -5,6 +5,7 @@ const tgApp = window.Telegram.WebApp
 interface ButtonProps {
   label: string
   onClick: React.MouseEventHandler<HTMLDivElement>
+  disabled?: boolean
 }
 
 const WebMainButton: React.FC<ButtonProps> = ({ label, onClick }) => {
@@ -18,7 +19,11 @@ const WebMainButton: React.FC<ButtonProps> = ({ label, onClick }) => {
   )
 }
 
-const TelegramMainButton: React.FC<ButtonProps> = ({ label, onClick }) => {
+const TelegramMainButton: React.FC<ButtonProps> = ({
+  label,
+  onClick,
+  disabled = false
+}) => {
   useEffect(() => {
     tgApp.MainButton.show()
     return () => tgApp.MainButton.hide()
@@ -29,9 +34,13 @@ const TelegramMainButton: React.FC<ButtonProps> = ({ label, onClick }) => {
   }, [label])
 
   useEffect(() => {
-    window.Telegram.WebApp.MainButton.onClick(onClick)
-    return () => window.Telegram.WebApp.MainButton.offClick(onClick)
+    tgApp.MainButton.onClick(onClick)
+    return () => tgApp.MainButton.offClick(onClick)
   }, [onClick])
+
+  useEffect(() => {
+    disabled ? tgApp.MainButton.disable() : tgApp.MainButton.enable()
+  }, [disabled])
 
   return null
 }

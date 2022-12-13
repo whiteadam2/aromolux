@@ -1,4 +1,5 @@
 import { TelegramWebApps } from 'telegram-webapps-types'
+import { AxiosError, AxiosResponse } from 'axios'
 
 declare global {
   interface Window {
@@ -50,6 +51,6 @@ export interface IViewState {
 
 export interface ISendOrderState {
   isPending: boolean
-  error: any
-  success: any
+  error: null | AxiosError
+  success: null | AxiosResponse
 }

@@ -10,7 +10,7 @@ const initialState: ISendOrderState = {
   success: null
 }
 
-export async function sendOrderToBot(
+async function sendOrderToBot(
   data: IBotOrder,
   queryId?: string
 ): Promise<AxiosResponse> {
