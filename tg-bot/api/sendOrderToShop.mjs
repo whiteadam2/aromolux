@@ -15,6 +15,10 @@ const token = ConfigContainer.config.ordersProcessing.token;
  */
 
 export async function sendOrderToShop(order) {
+  console.log(shopUrl);
+  console.log(token);
+  console.log(order);
+
   return await axios.post(shopUrl, order, {
     headers: {
       "Content-Type": "application/json",
