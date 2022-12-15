@@ -1,16 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ICart, IProduct } from '../@types'
 
-const initialState: ICart = { orders: [], total: 0 }
+const cartLS = localStorage.getItem('cart')
+
+const initialState: ICart =
+  cartLS !== null ? (JSON.parse(cartLS) as ICart) : { orders: [], total: 0 }
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addProduct: (state, action: PayloadAction<IProduct>) => {
-      const order = state.orders.find(
-        (order) => order.id === action.payload.id
-      )
+      const order = state.orders.find((order) => order.id === action.payload.id)
 
       if (order != null) {
         order.count++
@@ -21,9 +22,7 @@ export const cartSlice = createSlice({
       state.total += action.payload.price
     },
     removeProduct: (state, action: PayloadAction<string>) => {
-      const index = state.orders.findIndex(
-        (order) => order.id === action.payload
-      )
+      const index = state.orders.findIndex((order) => order.id === action.payload)
       if (index >= 0) {
         const order = state.orders[index]
 
@@ -36,6 +35,8 @@ export const cartSlice = createSlice({
   }
 })
 
-export const { addProduct, removeProduct } = cartSlice.actions
+const actions = Object.keys(cartSlice.actions) as Array<keyof typeof cartSlice.actions>
 
+export const cartActionTypes = actions.map((action) => cartSlice.actions[action].type)
+export const { addProduct, removeProduct } = cartSlice.actions
 export default cartSlice.reducer
