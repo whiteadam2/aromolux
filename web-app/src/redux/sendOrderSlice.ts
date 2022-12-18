@@ -10,10 +10,7 @@ const initialState: ISendOrderState = {
   success: null
 }
 
-async function sendOrderToBot(
-  data: IBotOrder,
-  queryId?: string
-): Promise<AxiosResponse> {
+async function sendOrderToBot(data: IBotOrder, queryId?: string): Promise<AxiosResponse> {
   return await axios({
     url: config.tgBotWebServer,
     method: 'post',
