@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { IProduct, IOrder } from '../@types'
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { addProduct, removeProduct } from '../redux/cartSlice'
@@ -10,8 +10,10 @@ interface ProductProps {
 export const Product: React.FC<ProductProps> = ({ data }) => {
   const dispatch = useAppDispatch()
 
-  const orders = useAppSelector((state) => state.cart.orders)
-  const productInCart = orders.find((order: IOrder) => order.id === data.id)
+  const cart = useAppSelector((state) => state.cart)
+  const productInCart = cart.orders.find(
+    (order: IOrder) => order.id === data.id
+  )
 
   const handleClickAdd = (data: IProduct): void => {
     dispatch(addProduct(data))
@@ -22,6 +24,10 @@ export const Product: React.FC<ProductProps> = ({ data }) => {
     dispatch(removeProduct(id))
     window.Telegram.WebApp.HapticFeedback.impactOccurred('medium')
   }
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart])
 
   return (
     <div className="flex flex-col items-center w-40">

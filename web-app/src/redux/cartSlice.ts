@@ -1,16 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ICart, IProduct } from '../@types'
 
-const initialState: ICart = { orders: [], total: 0 }
+const cartLS = localStorage.getItem('cart')
+
+const initialState: ICart =
+  cartLS !== null ? JSON.parse(cartLS) : { orders: [], total: 0 }
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addProduct: (state, action: PayloadAction<IProduct>) => {
-      const order = state.orders.find(
-        (order) => order.id === action.payload.id
-      )
+      const order = state.orders.find((order) => order.id === action.payload.id)
 
       if (order != null) {
         order.count++
