@@ -8,6 +8,10 @@
     {
       "url": "http://localhost:3020/",
       "description": "Web developer server"
+    },
+    {
+      "url": "https://aromomania.ru/orders",
+      "description": "Production server"
     }
   ],
   "paths": {
