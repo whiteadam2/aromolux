@@ -1,8 +1,10 @@
 import express from "express";
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
 import ordersRouter from "./routs/orders.mjs";
 import { validation } from "./middleware/validation.js";
-import { schemaWebAppData } from "./schemas/schemaWebAppData.mjs";
+import { WebAppDataSchema } from "./schemas/WebAppDataSchema.mjs";
+import * as swagger from "./swagger.json" assert { type: "json" };
 
 let http = null;
 
@@ -10,7 +12,8 @@ export function start(config) {
   http = express()
     .use(express.json())
     .use(cors())
-    .use("/orders", validation(schemaWebAppData), ordersRouter)
+    .use("/orders", validation(WebAppDataSchema), ordersRouter)
+    .use("/api-docs", swaggerUi.serve, swaggerUi.setup(swagger.default))
     .listen(config.port, () => console.log(`Listening port ${config.port}...`));
 }
 

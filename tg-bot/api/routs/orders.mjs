@@ -1,7 +1,10 @@
 import express from "express";
-import { bot } from "../bot.mjs";
-import { messageFromData, orderFromData } from "../utils/convertWebAppData.mjs";
-import { sendOrderToShop } from "../api/sendOrderToShop.mjs";
+import { bot } from "../../bot.mjs";
+import {
+  messageFromData,
+  orderFromData,
+} from "../../utils/convertWebAppData.mjs";
+import { sendOrderToShop } from "../../utils/sendOrderToShop.mjs";
 
 const router = express.Router();
 

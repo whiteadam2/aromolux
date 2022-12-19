@@ -1,0 +1,97 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Orders REST API",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3020/",
+      "description": "Web developer server"
+    }
+  ],
+  "paths": {
+    "/orders": {
+      "post": {
+        "summary": "Place order and process it via e-Shop",
+        "tags": ["Orders"],
+        "operationId": "createOrder",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Order was placed successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Order": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "cart": {
+                "type": "object",
+                "properties": {
+                  "orders": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "name": { "type": "string" },
+                        "picture": { "type": "string" },
+                        "price": { "type": "number", "format": "float" },
+                        "oldprice": { "type": "number", "format": "float" },
+                        "count": { "type": "number", "format": "float" }
+                      },
+                      "required": [
+                        "id",
+                        "name",
+                        "picture",
+                        "price",
+                        "oldprice",
+                        "count"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "total": { "type": "number", "format": "float" }
+                },
+                "required": ["orders", "total"],
+                "additionalProperties": false
+              },
+              "user": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "phoneNumber": { "type": "string" }
+                },
+                "required": ["name", "phoneNumber"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["cart", "user"],
+            "additionalProperties": false
+          },
+          "queryId": { "type": "string" }
+        },
+        "required": ["data", "queryId"],
+        "additionalProperties": false
+      }
+    }
+  }
+}

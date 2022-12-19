@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const schemaOrders = Joi.array()
+const OrdersSchema = Joi.array()
   .items(
     Joi.object({
       id: Joi.string().required(),
@@ -14,10 +14,10 @@ const schemaOrders = Joi.array()
   .required()
   .min(1);
 
-export const schemaWebAppData = Joi.object({
+export const WebAppDataSchema = Joi.object({
   data: Joi.object({
     cart: Joi.object({
-      orders: schemaOrders,
+      orders: OrdersSchema,
       total: Joi.number().required().greater(0),
     }).required(),
     user: Joi.object({
