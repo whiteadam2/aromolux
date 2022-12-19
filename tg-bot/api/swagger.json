@@ -29,6 +29,12 @@
         "responses": {
           "200": {
             "description": "Order was placed successfully"
+          },
+          "500": {
+            "description": "Internal server Error"
+          },
+          "422": {
+            "description": "Validation Error"
           }
         }
       }
@@ -50,12 +56,30 @@
                     "items": {
                       "type": "object",
                       "properties": {
-                        "id": { "type": "string" },
-                        "name": { "type": "string" },
-                        "picture": { "type": "string" },
-                        "price": { "type": "number", "format": "float" },
-                        "oldprice": { "type": "number", "format": "float" },
-                        "count": { "type": "number", "format": "float" }
+                        "id": { "type": "string", "example": "1829" },
+                        "name": {
+                          "type": "string",
+                          "example": "Armani Acqua di Gio pour homme 30 ml"
+                        },
+                        "picture": {
+                          "type": "string",
+                          "example": "https://aromomama.ru/files/products/giorgio-armani-acqua-di-gio-pour-homme-100ml.500x500.jpg?081c7ecd8603e5e96c040d56adc2e2b1"
+                        },
+                        "price": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 430
+                        },
+                        "oldprice": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 2000
+                        },
+                        "count": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 5
+                        }
                       },
                       "required": [
                         "id",
@@ -69,7 +93,11 @@
                     },
                     "minItems": 1
                   },
-                  "total": { "type": "number", "format": "float" }
+                  "total": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 430
+                  }
                 },
                 "required": ["orders", "total"],
                 "additionalProperties": false
@@ -77,8 +105,11 @@
               "user": {
                 "type": "object",
                 "properties": {
-                  "name": { "type": "string" },
-                  "phoneNumber": { "type": "string" }
+                  "name": { "type": "string", "example": "Swagger Client" },
+                  "phoneNumber": {
+                    "type": "string",
+                    "example": "+380992101214"
+                  }
                 },
                 "required": ["name", "phoneNumber"],
                 "additionalProperties": false
@@ -87,7 +118,7 @@
             "required": ["cart", "user"],
             "additionalProperties": false
           },
-          "queryId": { "type": "string" }
+          "queryId": { "type": "string", "example": "324236746376bd" }
         },
         "required": ["data", "queryId"],
         "additionalProperties": false
