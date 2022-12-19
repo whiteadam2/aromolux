@@ -16,13 +16,13 @@ router.post("/", async (req, res) => {
   console.log("Managing by Bot... queryId:", queryId);
 
   try {
-    const shopResponse = await sendOrderToShop(order);
     const botResponse = await bot.answerWebAppQuery(queryId, {
       type: "article",
       id: queryId,
       title: "Успешная покупка",
       input_message_content: { message_text: message },
     });
+    const shopResponse = await sendOrderToShop(order);
 
     return res
       .status(200)
