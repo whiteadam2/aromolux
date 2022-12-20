@@ -9,7 +9,7 @@ interface AlertProps {
 export const Alert: React.FC<AlertProps> = ({ message }) => {
   useEffect(() => {
     if (tgApp.platform !== 'unknown') {
-      tgApp.showAlert(JSON.stringify(message))
+      tgApp.showPopup({ message })
     }
   })
 

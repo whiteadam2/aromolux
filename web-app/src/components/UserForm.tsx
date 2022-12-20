@@ -14,9 +14,7 @@ export const UserForm: React.FC<UserFormProps> = ({ cart }) => {
   const [name, setName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const dispatch = useAppDispatch()
-  const { isPending, error, success } = useAppSelector(
-    (state) => state.botOrder
-  )
+  const { isPending, error } = useAppSelector((state) => state.botOrder)
 
   async function handleMainButtonClick(): Promise<void> {
     if (name === '' || phoneNumber === '') return
@@ -33,7 +31,7 @@ export const UserForm: React.FC<UserFormProps> = ({ cart }) => {
     const queryId = tgApp.initDataUnsafe?.query_id
 
     if (queryId !== undefined) {
-      dispatch(processOrder(botOrder, queryId)).catch((e) => console.log(e))
+      await dispatch(processOrder(botOrder, queryId))
       tgApp.close()
     }
   }
@@ -60,7 +58,6 @@ export const UserForm: React.FC<UserFormProps> = ({ cart }) => {
         disabled={isPending}
       />
       {error !== null && <Alert message={error.message} />}
-      {success !== null && <Alert message={JSON.stringify(success)} />}
     </>
   )
 }
