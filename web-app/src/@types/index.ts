@@ -51,6 +51,6 @@ export interface IViewState {
 
 export interface ISendOrderState {
   isPending: boolean
-  error: null | AxiosError
+  error: null | AxiosError<any>
   success: null | AxiosResponse
 }

@@ -57,7 +57,7 @@ export const UserForm: React.FC<UserFormProps> = ({ cart }) => {
         onClick={handleMainButtonClick}
         disabled={isPending}
       />
-      {error !== null && <Alert message={error.message} />}
+      {error !== null && <Alert message={error.response?.data.message} />}
     </>
   )
 }
