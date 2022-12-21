@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 import { createSlice } from '@reduxjs/toolkit'
 import config from '../config/config.json'
 import { IBotOrder, ISendOrderState } from '../@types'
@@ -26,8 +26,9 @@ export const processOrder =
       dispatch(setPendingStatus(false))
       dispatch(setSuccess(response))
     } catch (e) {
+      const axiosErr = e as AxiosError<any>
       dispatch(setPendingStatus(false))
-      dispatch(setError(e))
+      dispatch(setError(axiosErr.response?.data.message))
     }
   }
 
