@@ -42,6 +42,7 @@
         }
       }
     ],
+    "@typescript-eslint/return-await": ["error", "never"],
     "multiline-ternary": ["error", "never"]
   },
   "settings": {

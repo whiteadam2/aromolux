@@ -11,7 +11,7 @@ const initialState: ISendOrderState = {
 }
 
 async function sendOrderToBot(data: IBotOrder, queryId?: string): Promise<AxiosResponse> {
-  return await axios.post(config.tgBotWebServer, JSON.stringify({ data, queryId }), {
+  return axios.post(config.tgBotWebServer, JSON.stringify({ data, queryId }), {
     headers: {
       'Content-Type': 'application/json'
     }
