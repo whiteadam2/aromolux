@@ -22,6 +22,7 @@ export const processOrder =
   (data: IBotOrder, queryId?: string) => async (dispatch: AppDispatch) => {
     dispatch(setPendingStatus(true))
     try {
+      localStorage.clear()
       const response = await sendOrderToBot(data, queryId)
       dispatch(setPendingStatus(false))
       dispatch(setSuccess(response))
