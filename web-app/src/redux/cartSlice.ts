@@ -1,0 +1,42 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { ICart, IProduct } from '../@types'
+
+const cartLS = localStorage.getItem('cart')
+
+const initialState: ICart =
+  cartLS !== null ? (JSON.parse(cartLS) as ICart) : { orders: [], total: 0 }
+
+export const cartSlice = createSlice({
+  name: 'cart',
+  initialState,
+  reducers: {
+    addProduct: (state, action: PayloadAction<IProduct>) => {
+      const order = state.orders.find((order) => order.id === action.payload.id)
+
+      if (order != null) {
+        order.count++
+      } else {
+        state.orders.push({ ...action.payload, count: 1 })
+      }
+
+      state.total += action.payload.price
+    },
+    removeProduct: (state, action: PayloadAction<string>) => {
+      const index = state.orders.findIndex((order) => order.id === action.payload)
+      if (index >= 0) {
+        const order = state.orders[index]
+
+        if (order.count > 0) order.count--
+        if (order.count === 0) state.orders.splice(index, 1)
+
+        state.total -= order.price
+      }
+    }
+  }
+})
+
+const actions = Object.keys(cartSlice.actions) as Array<keyof typeof cartSlice.actions>
+
+export const cartActionTypes = actions.map((action) => cartSlice.actions[action].type)
+export const { addProduct, removeProduct } = cartSlice.actions
+export default cartSlice.reducer

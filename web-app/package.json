@@ -1,12 +1,17 @@
 {
   "name": "web-app",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.0",
     "@tanstack/react-query": "^4.10.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.2.3",
+    "@types/node": "^18.11.9",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
     "axios": "^1.1.0",
     "classnames": "^2.3.2",
     "fast-xml-parser": "^4.0.11",
@@ -14,21 +19,18 @@
     "react": "^18.2.0",
     "react-content-loader": "^6.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
+    "telegram-webapps-types": "^1.0.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "lint": "./node_modules/.bin/eslint --fix src",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -43,9 +45,18 @@
     ]
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
     "autoprefixer": "^10.4.12",
+    "eslint": "^8.29.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.31.11",
     "postcss": "^8.4.17",
-    "prettier": "2.7.1",
-    "tailwindcss": "^3.1.8"
+    "prettier": "2.8.0",
+    "tailwindcss": "^3.1.8",
+    "typescript": "^4.9.3"
   }
 }

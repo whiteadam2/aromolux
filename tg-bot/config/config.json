@@ -1,0 +1,11 @@
+{
+    "ordersProcessing": {
+        "baseUrl": "{{ORDERS_PROCESSING_BASE_URL}}",
+        "token": "{{ORDERS_PROCESSING_TOKEN}}"
+    },
+    "tg": {
+        "botToken": "{{TELEGRAM_BOT_TOKEN}}",
+        "webAppUrl": "{{TELEGRAM_WEB_APP_URL}}"
+    },
+    "port": "{{PORT}}"
+}

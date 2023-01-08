@@ -1,0 +1,21 @@
+{
+  "ordersProcessing": [
+    "required",
+    {
+      "nested_object": {
+        "baseUrl": ["required", "string"],
+        "token": ["required", "string"]
+      }
+    }
+  ],
+  "tg": [
+    "required",
+    {
+      "nested_object": {
+        "botToken": ["required", "string"],
+        "webAppUrl": ["required", "string"]
+      }
+    }
+  ],
+  "port": ["required", "positive_integer"]
+}
